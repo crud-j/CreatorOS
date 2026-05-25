@@ -1,0 +1,464 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--pink:#FF3CAC;--purple:#784BA0;--dark:#0A0A0A;--white:#FAFAFA;
+--gray:#F5F5F5;--muted:#888;--border:rgba(0,0,0,0.08);
+}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary)}
+
+.lp{max-width:680px;margin:0 auto}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);position:sticky;top:0;z-index:10}
+.nav-logo{font-size:16px;font-weight:500;color:var(--color-text-primary);display:flex;align-items:center;gap:8px}
+.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:#FF3CAC}
+.nav-links{display:flex;gap:20px;list-style:none}
+.nav-links a{font-size:13px;color:var(--color-text-secondary);text-decoration:none}
+.nav-links a:hover{color:var(--color-text-primary)}
+.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:var(--border-radius-md);background:#FF3CAC;color:#fff;border:none;cursor:pointer}
+
+.hero{padding:56px 20px 48px;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);margin-bottom:20px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#FF3CAC}
+.hero h1{font-size:36px;font-weight:500;line-height:1.2;color:var(--color-text-primary);margin-bottom:16px;letter-spacing:-0.5px}
+.hero h1 span{color:#FF3CAC}
+.hero-sub{font-size:15px;color:var(--color-text-secondary);line-height:1.7;max-width:480px;margin:0 auto 28px}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.btn-primary{padding:11px 24px;border-radius:var(--border-radius-md);background:#FF3CAC;color:#fff;font-size:14px;font-weight:500;border:none;cursor:pointer}
+.btn-secondary{padding:11px 24px;border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-primary);font-size:14px;font-weight:500;border:0.5px solid var(--color-border-secondary);cursor:pointer;display:flex;align-items:center;gap:6px}
+.hero-social-proof{display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;color:var(--color-text-tertiary)}
+.avatars{display:flex}
+.av{width:24px;height:24px;border-radius:50%;background:var(--color-background-info);border:1.5px solid var(--color-background-primary);margin-left:-6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:var(--color-text-info)}
+.av:first-child{margin-left:0}
+.av2{background:#FBEAF0;color:#993556}
+.av3{background:#E1F5EE;color:#085041}
+.av4{background:#FAEEDA;color:#633806}
+.av5{background:#EEEDFE;color:#3C3489}
+
+.mockup-strip{padding:20px;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.mockup-window{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);overflow:hidden}
+.mockup-bar{padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot-r{background:#F09595}.dot-y{background:#FAC775}.dot-g{background:#9FE1CB}
+.mockup-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px}
+.m-card-label{font-size:10px;color:var(--color-text-tertiary);margin-bottom:4px}
+.m-card-content{font-size:12px;color:var(--color-text-primary);line-height:1.5}
+.m-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:4px;margin-top:4px;font-weight:500}
+.m-badge-pink{background:#FBEAF0;color:#993556}
+.m-badge-teal{background:#E1F5EE;color:#085041}
+.m-badge-purple{background:#EEEDFE;color:#3C3489}
+.m-badge-amber{background:#FAEEDA;color:#633806}
+.m-input{width:100%;font-size:11px;padding:6px 8px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);margin-bottom:6px}
+.m-progress{height:3px;background:var(--color-border-tertiary);border-radius:2px;margin-top:6px}
+.m-progress-fill{height:3px;border-radius:2px;background:#FF3CAC}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.stat{padding:24px 16px;text-align:center;border-right:0.5px solid var(--color-border-tertiary)}
+.stat:last-child{border-right:none}
+.stat-num{font-size:28px;font-weight:500;color:#FF3CAC;display:block;margin-bottom:4px}
+.stat-label{font-size:12px;color:var(--color-text-secondary)}
+
+.section{padding:40px 20px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.section-eyebrow{font-size:11px;font-weight:500;color:#FF3CAC;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.section-title{font-size:24px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.3}
+.section-sub{font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:24px}
+
+.how-steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:16px;padding:16px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.step:last-child{border-bottom:none}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0;margin-top:2px}
+.step-body h4{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.step-body p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.step-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;margin-top:6px;padding:3px 8px;border-radius:4px;background:#FBEAF0;color:#993556;font-weight:500}
+
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.feature-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px}
+.feature-icon{width:36px;height:36px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:18px}
+.feature-card h4{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.feature-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+
+.output-demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:16px}
+.output-chip{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px}
+.output-platform{font-size:10px;font-weight:500;color:var(--color-text-tertiary);margin-bottom:2px;display:flex;align-items:center;gap:4px}
+.output-preview{font-size:12px;color:var(--color-text-primary);line-height:1.5}
+
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.testi-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px}
+.testi-stars{color:#FF3CAC;font-size:12px;margin-bottom:8px;letter-spacing:2px}
+.testi-quote{font-size:13px;color:var(--color-text-primary);line-height:1.6;margin-bottom:12px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:8px}
+.testi-av{width:28px;height:28px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--color-text-info);flex-shrink:0}
+.testi-name{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.testi-handle{font-size:11px;color:var(--color-text-tertiary)}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
+.pricing-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:20px 16px}
+.pricing-card.featured{border:2px solid #FF3CAC}
+.pricing-tier{font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em}
+.pricing-price{font-size:28px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.pricing-price span{font-size:13px;color:var(--color-text-tertiary);font-weight:400}
+.pricing-desc{font-size:12px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.5}
+.pricing-features{list-style:none;margin-bottom:16px}
+.pricing-features li{font-size:12px;color:var(--color-text-primary);padding:4px 0;display:flex;align-items:center;gap:6px}
+.pricing-features li i{color:#1D9E75;font-size:13px}
+.pricing-btn{width:100%;padding:9px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary)}
+.pricing-btn.featured-btn{background:#FF3CAC;color:#fff;border:none}
+.popular-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;background:#FBEAF0;color:#993556;font-weight:500;margin-bottom:6px}
+
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{padding:14px 0;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer}
+.faq-q{font-size:14px;font-weight:500;color:var(--color-text-primary);display:flex;justify-content:space-between;align-items:center}
+.faq-a{font-size:13px;color:var(--color-text-secondary);line-height:1.7;margin-top:8px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-chevron{transition:transform 0.2s;flex-shrink:0;margin-left:8px}
+
+.cta-section{padding:48px 20px;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary)}
+.cta-section h2{font-size:26px;font-weight:500;margin-bottom:10px;line-height:1.3}
+.cta-section p{font-size:14px;color:var(--color-text-secondary);margin-bottom:24px}
+.cta-input-row{display:flex;gap:8px;max-width:380px;margin:0 auto}
+.cta-input-row input{flex:1;padding:10px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px}
+.cta-input-row button{padding:10px 18px;background:#FF3CAC;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+
+.footer{padding:24px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.footer-logo{font-size:14px;font-weight:500;color:var(--color-text-primary);display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.footer-tagline{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.footer-col h5{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.footer-col a{display:block;font-size:12px;color:var(--color-text-secondary);text-decoration:none;margin-bottom:5px}
+.footer-col a:hover{color:var(--color-text-primary)}
+.footer-bottom{padding:12px 20px;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center}
+.footer-bottom span{font-size:11px;color:var(--color-text-tertiary)}
+</style>
+
+<div class="lp">
+
+<nav class="nav">
+  <div class="nav-logo"><div class="nav-logo-dot"></div>CreatorOS</div>
+  <ul class="nav-links">
+    <li><a href="#">How it works</a></li>
+    <li><a href="#">Examples</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Start free</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge"><div class="hero-badge-dot"></div>Now with UiPath autopilot — zero manual posting</div>
+  <h1>One video.<br><span>30 posts.</span> Zero effort.</h1>
+  <p class="hero-sub">CreatorOS turns your long-form content into platform-ready posts for every channel — automatically, in your voice, scheduled at the perfect time.</p>
+  <div class="hero-actions">
+    <button class="btn-primary">Start for free — no credit card</button>
+    <button class="btn-secondary"><i class="ti ti-player-play" style="font-size:14px" aria-hidden="true"></i> Watch 90-sec demo</button>
+  </div>
+  <div class="hero-social-proof">
+    <div class="avatars">
+      <div class="av">JR</div><div class="av av2">MK</div><div class="av av3">TL</div><div class="av av4">SP</div><div class="av av5">AW</div>
+    </div>
+    <span>Trusted by 2,400+ creators. 5 free runs/month, always.</span>
+  </div>
+</section>
+
+<div class="mockup-strip">
+  <div class="mockup-window">
+    <div class="mockup-bar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span style="font-size:11px;color:var(--color-text-tertiary);margin-left:8px">creatoros.app — content workspace</span>
+    </div>
+    <div class="mockup-body">
+      <div class="m-card">
+        <div class="m-card-label">Input</div>
+        <input class="m-input" value="youtube.com/watch?v=..." readonly>
+        <div class="m-card-content" style="font-size:11px;color:var(--color-text-tertiary)">or drop an MP4 / podcast MP3</div>
+        <div style="margin-top:8px">
+          <div style="font-size:10px;color:var(--color-text-tertiary);margin-bottom:3px">Transcribing...</div>
+          <div class="m-progress"><div class="m-progress-fill" style="width:72%"></div></div>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-label">Generated outputs — 28 / 30</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">
+          <span class="m-badge m-badge-pink">Reels script</span>
+          <span class="m-badge m-badge-teal">LinkedIn post</span>
+          <span class="m-badge m-badge-purple">Tweet thread</span>
+          <span class="m-badge m-badge-amber">Newsletter</span>
+          <span class="m-badge m-badge-pink">Pinterest</span>
+          <span class="m-badge m-badge-teal">YT community</span>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-label">Viral moments detected</div>
+        <div class="m-card-content">02:14 — strongest hook<br>07:41 — most shareable insight<br>14:22 — best CTA moment</div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-label">Auto-scheduled</div>
+        <div class="m-card-content">Tue 9am — LinkedIn<br>Wed 6pm — Instagram<br>Thu 12pm — X / Twitter</div>
+        <span class="m-badge m-badge-teal"><i class="ti ti-check" style="font-size:9px" aria-hidden="true"></i> UiPath posting</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-num">30+</span><span class="stat-label">outputs per video</span></div>
+  <div class="stat"><span class="stat-num">4 min</span><span class="stat-label">average generation time</span></div>
+  <div class="stat"><span class="stat-num">6 platforms</span><span class="stat-label">auto-published</span></div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">How it works</div>
+  <div class="section-title">From raw content to 30 posts in 4 steps</div>
+  <div class="how-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Drop your content</h4>
+        <p>Paste a YouTube URL, upload an MP4, or connect your podcast RSS feed. CreatorOS handles every format without transcription tools or manual prep.</p>
+        <span class="step-tag"><i class="ti ti-upload" style="font-size:11px" aria-hidden="true"></i> YouTube · MP4 · MP3 · Loom</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Train your brand voice once</h4>
+        <p>Paste 3 of your best posts. The AI learns your tone, sentence rhythm, humor style, and CTA patterns — every output sounds like you wrote it yourself.</p>
+        <span class="step-tag"><i class="ti ti-sparkles" style="font-size:11px" aria-hidden="true"></i> One-time setup · updates as you rate outputs</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Get 30 platform-ready outputs</h4>
+        <p>Reels scripts, tweet threads, LinkedIn essays, newsletters, Pinterest captions, and YouTube community posts — all generated in parallel, all in your voice.</p>
+        <span class="step-tag"><i class="ti ti-bolt" style="font-size:11px" aria-hidden="true"></i> Generated in under 4 minutes</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Autopilot publishes everything</h4>
+        <p>UiPath robots post to each platform at the AI-predicted best time. Engagement data feeds back in — your schedule gets smarter every week.</p>
+        <span class="step-tag"><i class="ti ti-robot" style="font-size:11px" aria-hidden="true"></i> Powered by UiPath automation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Features</div>
+  <div class="section-title">Everything a solo creator needs</div>
+  <div class="section-sub">No video editor. No social media manager. No scheduling app. CreatorOS replaces all three.</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FBEAF0"><i class="ti ti-eye" style="color:#993556" aria-hidden="true"></i></div>
+      <h4>Viral moment detector</h4>
+      <p>AI scores every segment of your video for hook strength, emotional impact, and shareability. Your best clips, found automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#E1F5EE"><i class="ti ti-microphone" style="color:#085041" aria-hidden="true"></i></div>
+      <h4>Brand voice AI</h4>
+      <p>Trained on your own writing. Every output passes a tone consistency check before you see it — nothing off-brand ever surfaces.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#EEEDFE"><i class="ti ti-calendar" style="color:#3C3489" aria-hidden="true"></i></div>
+      <h4>Smart content calendar</h4>
+      <p>Visual week/month planner. Drag to reschedule. Platform color-coding. Queue status at a glance.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FAEEDA"><i class="ti ti-robot" style="color:#633806" aria-hidden="true"></i></div>
+      <h4>UiPath autopilot</h4>
+      <p>Unattended robots publish to Meta, LinkedIn, X, and YouTube at your optimal windows. Engagement scraped back automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FBEAF0"><i class="ti ti-chart-bar" style="color:#993556" aria-hidden="true"></i></div>
+      <h4>Analytics dashboard</h4>
+      <p>See what's working across all platforms in one place. Weekly AI coach report every Sunday evening.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#E1F5EE"><i class="ti ti-refresh" style="color:#085041" aria-hidden="true"></i></div>
+      <h4>Trend scout agent</h4>
+      <p>Daily scan of trending topics in your niche. Pro users get auto-generated content briefs waiting every morning.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Examples</div>
+  <div class="section-title">What comes out of one 20-minute video</div>
+  <div class="section-sub">From a single podcast episode on "building in public" — here's what CreatorOS generates:</div>
+  <div class="output-demo">
+    <div class="output-chip">
+      <div class="output-platform"><i class="ti ti-brand-instagram" style="font-size:12px" aria-hidden="true"></i> Reels script</div>
+      <div class="output-preview">"I launched with zero followers and $0 revenue. Here's the thing nobody tells you about building in public..."</div>
+    </div>
+    <div class="output-chip">
+      <div class="output-platform"><i class="ti ti-brand-twitter" style="font-size:12px" aria-hidden="true"></i> Tweet thread</div>
+      <div class="output-preview">1/ I've been building my SaaS publicly for 90 days. The raw numbers, the brutal lessons, and what actually moved the needle...</div>
+    </div>
+    <div class="output-chip">
+      <div class="output-platform"><i class="ti ti-brand-linkedin" style="font-size:12px" aria-hidden="true"></i> LinkedIn essay</div>
+      <div class="output-preview">Six months ago I made a decision that felt stupid at the time: I decided to show my work before it was ready. Here's what happened...</div>
+    </div>
+    <div class="output-chip">
+      <div class="output-platform"><i class="ti ti-mail" style="font-size:12px" aria-hidden="true"></i> Newsletter section</div>
+      <div class="output-preview">This week's big lesson: transparency is a growth strategy, not just a personality trait. Let me show you the receipts...</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">What creators say</div>
+  <div class="section-title">Real results from real creators</div>
+  <div style="margin-top:16px" class="testimonials">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"I was spending 12 hours a week repurposing content. CreatorOS cut it to under 30 minutes. I can't go back."</div>
+      <div class="testi-author">
+        <div class="testi-av">JR</div>
+        <div><div class="testi-name">Jake Reyes</div><div class="testi-handle">@jakereyes · 84K YouTube</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"The brand voice training is scary good. My audience thought I was posting manually for three weeks before I told them."</div>
+      <div class="testi-author">
+        <div class="testi-av av2">MK</div>
+        <div><div class="testi-name">Maya Kowalski</div><div class="testi-handle">@mayakowalski · 210K TikTok</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"My LinkedIn went from 800 to 14,000 followers in 90 days. I attribute 80% of that to showing up consistently via CreatorOS."</div>
+      <div class="testi-author">
+        <div class="testi-av av3">TL</div>
+        <div><div class="testi-name">Tom Laird</div><div class="testi-handle">@tomlaird · 14K LinkedIn</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Pricing</div>
+  <div class="section-title">Simple, honest pricing</div>
+  <div class="section-sub">No per-seat fees. No hidden usage limits. Cancel any time.</div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Free</div>
+      <div class="pricing-price">$0<span> / mo</span></div>
+      <div class="pricing-desc">Perfect for trying CreatorOS with your first few videos.</div>
+      <ul class="pricing-features">
+        <li><i class="ti ti-check" aria-hidden="true"></i>5 video runs / month</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>30 outputs per run</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Brand voice training</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Manual scheduling</li>
+      </ul>
+      <button class="pricing-btn">Get started free</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="popular-badge">Most popular</div>
+      <div class="pricing-tier">Pro</div>
+      <div class="pricing-price">$29<span> / mo</span></div>
+      <div class="pricing-desc">For active creators publishing 3–5x per week.</div>
+      <ul class="pricing-features">
+        <li><i class="ti ti-check" aria-hidden="true"></i>Unlimited video runs</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>UiPath autopilot publish</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Smart content calendar</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Analytics dashboard</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Weekly AI coach report</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Trend scout (daily brief)</li>
+      </ul>
+      <button class="pricing-btn featured-btn">Start Pro — 14 days free</button>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Agency</div>
+      <div class="pricing-price">$99<span> / mo</span></div>
+      <div class="pricing-desc">Manage up to 10 creator workspaces from one account.</div>
+      <ul class="pricing-features">
+        <li><i class="ti ti-check" aria-hidden="true"></i>10 creator workspaces</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Everything in Pro</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>White-label reports</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Priority support</li>
+      </ul>
+      <button class="pricing-btn">Talk to us</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">FAQ</div>
+  <div class="section-title">Common questions</div>
+  <div class="faq-list" id="faq">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Does it actually sound like me, or does it sound like AI?<i class="ti ti-chevron-down faq-chevron" style="font-size:16px" aria-hidden="true"></i></div>
+      <div class="faq-a">CreatorOS trains a voice profile from your own writing samples and runs every output through a brand consistency check. If the tone drifts, it automatically revises before showing you. Most users' audiences can't tell the difference — we've had creators run for weeks without mentioning it.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Which platforms does the autopilot support?<i class="ti ti-chevron-down faq-chevron" style="font-size:16px" aria-hidden="true"></i></div>
+      <div class="faq-a">Instagram (Reels + Feed), LinkedIn, X/Twitter, YouTube (Community posts + Shorts metadata), Pinterest, and Facebook Pages. TikTok autopublish is in beta — you can schedule the content and get a one-tap post reminder instead.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What video formats and lengths do you support?<i class="ti ti-chevron-down faq-chevron" style="font-size:16px" aria-hidden="true"></i></div>
+      <div class="faq-a">MP4, MOV, and MP3 up to 4 hours. YouTube URLs of any length. Loom recordings. Podcast RSS feeds (auto-ingested daily). The longer the video, the more outputs and viral moment clips we can extract from it.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can I edit the outputs before they go out?<i class="ti ti-chevron-down faq-chevron" style="font-size:16px" aria-hidden="true"></i></div>
+      <div class="faq-a">Yes, always. Every output has an inline editor. You can edit, regenerate with new instructions, or reject it entirely. The autopilot only publishes outputs you've approved — you're always in control of what goes live.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is my content stored or used to train AI models?<i class="ti ti-chevron-down faq-chevron" style="font-size:16px" aria-hidden="true"></i></div>
+      <div class="faq-a">Your raw video files are stored temporarily (90-day TTL on S3) and are never used to train any model. Your brand voice data and generated content are stored privately and are never shared or used externally. You can delete all your data from Settings at any time.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Start turning one video<br>into a week of content</h2>
+  <p>Free forever on the starter plan. No credit card required.</p>
+  <div class="cta-input-row">
+    <input type="email" placeholder="your@email.com">
+    <button>Get started free</button>
+  </div>
+  <p style="font-size:11px;color:var(--color-text-tertiary);margin-top:12px">5 free runs/month · No credit card · Cancel any time</p>
+</section>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo"><div class="nav-logo-dot"></div>CreatorOS</div>
+    <div class="footer-tagline">The operating system for content creators. One video, every platform, zero effort.</div>
+  </div>
+  <div class="footer-col">
+    <h5>Product</h5>
+    <a href="#">How it works</a>
+    <a href="#">Examples</a>
+    <a href="#">Pricing</a>
+    <a href="#">Changelog</a>
+    <a href="#">Roadmap</a>
+  </div>
+  <div class="footer-col">
+    <h5>Company</h5>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy policy</a>
+    <a href="#">Terms of service</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 CreatorOS. All rights reserved.</span>
+  <span style="display:flex;gap:12px">
+    <a href="#" style="font-size:11px;color:var(--color-text-tertiary);text-decoration:none"><i class="ti ti-brand-twitter" aria-hidden="true"></i></a>
+    <a href="#" style="font-size:11px;color:var(--color-text-tertiary);text-decoration:none"><i class="ti ti-brand-instagram" aria-hidden="true"></i></a>
+    <a href="#" style="font-size:11px;color:var(--color-text-tertiary);text-decoration:none"><i class="ti ti-brand-youtube" aria-hidden="true"></i></a>
+  </span>
+</div>
+
+</div>
+
+<script>
+function toggleFaq(el){
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)el.classList.add('open');
+}
+</script>

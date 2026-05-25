@@ -1,11 +1,16 @@
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950">
-      <h1 className="text-4xl font-bold text-red-900">
-        CreatorOS is Working
-      </h1>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
