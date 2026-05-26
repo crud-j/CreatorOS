@@ -1,161 +1,136 @@
 export default function HeroContent() {
     return (
-        <section className="relative w-full px-4 sm:px-6 lg:px-8 py-24 text-white flex items-center justify-center min-h-screen">
-            {/* 3D Spline Background */}
-            <div className="absolute inset-0 z-0">
-            </div>
+        <section className="relative w-full min-h-screen flex items-center justify-center px-6 sm:px-8 lg:px-12 py-32 overflow-hidden text-white">
 
-            <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center text-center pointer-events-none">
+            <div className="relative z-10 mx-auto max-w-7xl text-center">
 
-                {/* Premium Announcement Badge */}
-                <div className="pointer-events-auto group mb-10 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05] cursor-pointer">
+                {/* Top Badge */}
+                <div className="mb-12 inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2.5 text-sm text-white/50 backdrop-blur-sm">
+                    <div className="w-2 h-2 rounded-full bg-white/70" />
 
-                    <div className="relative flex h-2.5 w-2.5">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                    </div>
-
-                    <span className="text-sm font-medium tracking-wide text-white/75">
-                        CreatorOS 2.0 is officially live
+                    <span className="tracking-wide">
+                        CreatorOS 2.0 is now live
                     </span>
-
-                    <svg
-                        className="h-4 w-4 text-white/40 transition-transform duration-300 group-hover:translate-x-0.5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2.2}
-                            d="M9 5l7 7-7 7"
-                        />
-                    </svg>
                 </div>
 
-                {/* Main Heading */}
-                <div className="max-w-4xl drop-shadow-2xl">
-                    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-[-0.045em] leading-[1.02]">
+                {/* Hero Heading */}
+                <div className="max-w-5xl mx-auto">
+                    <h1 className="text-5xl sm:text-6xl lg:text-[96px] font-semibold leading-[0.92] tracking-[-0.06em]">
                         Turn one idea into
-                        <span className="relative block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-violet-400">
-                            weeks of content
+                        <span className="block text-white/30 mt-3">
+                            weeks of content.
                         </span>
-                        instantly.
                     </h1>
 
-                    {/* Supporting Copy */}
-                    <p className="mx-auto mt-7 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75 font-medium drop-shadow-md">
-                        CreatorOS transforms your long-form videos into polished,
-                        platform-native posts, clips, captions, and campaigns —
-                        automatically aligned to your voice and brand.
+                    <p className="mx-auto mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-white/50 font-normal">
+                        CreatorOS transforms long-form videos into premium,
+                        platform-native content systems — optimized for every channel,
+                        every format, and every audience.
                     </p>
                 </div>
 
-                {/* CTA Buttons */}
-                <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row pointer-events-auto">
+                {/* CTA */}
+                <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
 
-                    {/* Primary CTA */}
-                    <button className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl border border-indigo-400/20 bg-gradient-to-r from-indigo-500 to-violet-500 px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_10px_35px_rgba(99,102,241,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_45px_rgba(99,102,241,0.35)] active:translate-y-0">
+                    {/* Primary */}
+                    <button className="group inline-flex items-center justify-center gap-3 h-14 px-8 rounded-2xl bg-white text-black text-sm font-medium tracking-tight hover:opacity-90 transition-all duration-300">
+                        Start Free Trial
 
-                        <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.18),transparent)] translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-1000" />
-
-                        <span className="relative z-10 flex items-center gap-2">
-                            Start Free Trial
-
-                            <svg
-                                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2.3}
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                />
-                            </svg>
-                        </span>
+                        <svg
+                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                            />
+                        </svg>
                     </button>
 
-                    {/* Secondary CTA */}
-                    <button className="group inline-flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3.5 text-[15px] font-medium text-white/85 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]">
+                    {/* Secondary */}
+                    <button className="group inline-flex items-center justify-center gap-3 h-14 px-7 rounded-2xl border border-white/10 text-sm font-medium text-white/70 hover:text-white hover:border-white/25 transition-all duration-300">
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] transition-all duration-300 group-hover:bg-white/[0.08]">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10">
                             <svg
-                                className="ml-0.5 h-4 w-4"
-                                fill="currentColor"
+                                className="w-3 h-3 ml-0.5 fill-current"
                                 viewBox="0 0 24 24"
                             >
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                         </div>
 
-                        <span>Watch Demo</span>
+                        Watch Demo
                     </button>
                 </div>
 
-                {/* Trust Row */}
-                <div className="mt-14 flex flex-col items-center gap-5 pointer-events-auto">
+                {/* Social Proof */}
+                <div className="mt-24 flex flex-col items-center">
 
                     {/* Avatars */}
-                    <div className="flex items-center -space-x-3">
+                    <div className="flex items-center -space-x-4">
                         {[1, 2, 3, 4, 5].map((i) => (
                             <img
                                 key={i}
                                 src={`https://i.pravatar.cc/100?img=${i + 20}`}
                                 alt="Creator"
                                 loading="lazy"
-                                className="h-10 w-10 rounded-full border border-black/20 ring-2 ring-white/10"
+                                className="w-12 h-12 rounded-full border-2 border-black object-cover transition-transform duration-300 hover:-translate-y-1"
                             />
                         ))}
                     </div>
 
-                    {/* Social Proof */}
-                    <div className="flex flex-col items-center gap-2 sm:flex-row">
-
-                        <div className="flex items-center gap-1 text-amber-400 drop-shadow-md">
-                            {[...Array(5)].map((_, idx) => (
-                                <svg
-                                    key={idx}
-                                    className="h-4 w-4"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            ))}
-                        </div>
-
-                        <p className="text-sm text-white/90 drop-shadow-md font-medium">
-                            Trusted by{" "}
-                            <span className="font-bold text-white">
-                                10,000+ creators
-                            </span>{" "}
-                            building modern media brands.
-                        </p>
-                    </div>
+                    {/* Text */}
+                    <p className="mt-6 text-sm md:text-base text-white/45 max-w-xl leading-relaxed">
+                        Trusted by{" "}
+                        <span className="text-white font-medium">
+                            10,000+ creators
+                        </span>{" "}
+                        building modern media brands and scaling multi-platform
+                        distribution.
+                    </p>
                 </div>
 
-                {/* Minimal Metrics */}
-                <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-center pointer-events-auto drop-shadow-xl">
+                {/* Metrics */}
+                <div className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
 
                     {[
-                        { value: "30x", label: "Faster Repurposing" },
-                        { value: "12hrs", label: "Saved Weekly" },
-                        { value: "98%", label: "Voice Accuracy" },
+                        {
+                            value: "30x",
+                            label: "Faster Repurposing",
+                        },
+                        {
+                            value: "12hrs",
+                            label: "Saved Weekly",
+                        },
+                        {
+                            value: "98%",
+                            label: "Voice Accuracy",
+                        },
                     ].map((item, index) => (
-                        <div key={index} className="flex flex-col items-center backdrop-blur-sm bg-white/5 px-6 py-4 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
-                            <span className="text-3xl font-black tracking-tight text-white drop-shadow-md">
+                        <div
+                            key={index}
+                            className="rounded-[2rem] border border-white/10 px-8 py-10 text-center bg-white/[0.02]"
+                        >
+                            <div className="text-4xl md:text-5xl font-semibold tracking-[-0.05em]">
                                 {item.value}
-                            </span>
+                            </div>
 
-                            <span className="mt-1 text-sm text-white/70 font-medium">
+                            <div className="mt-4 text-[11px] uppercase tracking-[0.25em] text-white/35 font-medium">
                                 {item.label}
-                            </span>
+                            </div>
                         </div>
                     ))}
+                </div>
+
+                {/* Bottom Brand Statement */}
+                <div className="mt-28 overflow-hidden">
+                    <h2 className="text-[18vw] md:text-[14vw] leading-none font-semibold tracking-[-0.08em] text-white/[0.04] whitespace-nowrap select-none">
+                        CREATOROS
+                    </h2>
                 </div>
             </div>
         </section>

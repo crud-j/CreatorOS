@@ -1,241 +1,455 @@
+/*
+  PREMIUM TESTIMONIALS SECTION — FINAL REFINED VERSION
+
+  IMPROVEMENTS:
+  ✓ Much smoother GSAP motion
+  ✓ Better sticky timing
+  ✓ More premium spacing rhythm
+  ✓ Cleaner visual hierarchy
+  ✓ Better horizontal card alignment
+  ✓ More balanced typography
+  ✓ Better viewport composition
+  ✓ More elegant card sizing
+  ✓ Smoother easing curves
+  ✓ More natural parallax depth
+  ✓ Cleaner footer placement
+  ✓ More refined luxury aesthetic
+  ✓ Improved scroll experience
+  ✓ Better responsive proportions
+*/
+
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Star,
+} from 'lucide-react';
+
+import gsapActual from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiStar } from 'react-icons/fi';
+
+const gsap = gsapActual;
 
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
-    quote: "I was spending 12 hours a week repurposing content. CreatorOS cut it to under 30 minutes. I genuinely can't go back to the old way.",
+    quote:
+      "I was spending 12 hours a week repurposing content. CreatorOS reduced it to under 30 minutes. I genuinely can't go back.",
     name: 'Jake Reyes',
     handle: '@jakereyes',
     platform: '84K YouTube subscribers',
     initials: 'JR',
-    gradient: 'from-blue-500 to-indigo-500',
-    bg: 'bg-blue-500/10',
-    metric: '12h → 30min',
-    metricLabel: 'per week saved',
+    metric: '12h → 30m',
+    metricLabel: 'saved weekly',
   },
   {
-    quote: "The brand voice training is scary good. My audience thought I was posting manually for three weeks before I told them. Nobody noticed.",
+    quote:
+      'The voice training is scary accurate. My audience thought I was writing every post manually for weeks.',
     name: 'Maya Kowalski',
     handle: '@mayakowalski',
     platform: '210K TikTok followers',
     initials: 'MK',
-    gradient: 'from-pink-500 to-rose-500',
-    bg: 'bg-pink-500/10',
     metric: '100%',
-    metricLabel: 'brand consistency score',
+    metricLabel: 'brand consistency',
     featured: true,
   },
   {
-    quote: "My LinkedIn went from 800 to 14,000 followers in 90 days. I attribute 80% of that to showing up consistently via CreatorOS.",
+    quote:
+      'My LinkedIn grew from 800 to 14,000 followers in 90 days simply because I finally posted consistently.',
     name: 'Tom Laird',
     handle: '@tomlaird',
-    platform: '14K LinkedIn connections',
+    platform: '14K LinkedIn followers',
     initials: 'TL',
-    gradient: 'from-emerald-500 to-teal-500',
-    bg: 'bg-emerald-500/10',
     metric: '800 → 14K',
-    metricLabel: 'LinkedIn in 90 days',
+    metricLabel: 'in 90 days',
   },
   {
-    quote: "UiPath autopilot is wild. I record one video Sunday night and wake up Monday to posts going live across six platforms. It's like having a full team.",
+    quote:
+      'I record one video Sunday night and wake up Monday with content scheduled everywhere automatically.',
     name: 'Sandra Park',
     handle: '@sandrapark',
     platform: '52K Instagram followers',
     initials: 'SP',
-    gradient: 'from-violet-500 to-purple-500',
-    bg: 'bg-violet-500/10',
     metric: '6 platforms',
-    metricLabel: 'auto-published daily',
-  },
-  {
-    quote: "I tried 4 repurposing tools before this. Nothing else nails the voice match. My newsletter open rate went up 22% because readers can't tell what I wrote vs what it wrote.",
-    name: 'Alex Wu',
-    handle: '@alexwutech',
-    platform: '31K newsletter subscribers',
-    initials: 'AW',
-    gradient: 'from-amber-400 to-orange-500',
-    bg: 'bg-amber-500/10',
-    metric: '+22%',
-    metricLabel: 'newsletter open rate',
-  },
-  {
-    quote: "We manage 8 creator clients from one Agency dashboard. What used to take a team of 3 now runs on autopilot. CreatorOS pays for itself 10x over.",
-    name: 'Rachel Singh',
-    handle: '@rachelcreates',
-    platform: 'Agency · 8 client brands',
-    initials: 'RS',
-    gradient: 'from-sky-400 to-blue-500',
-    bg: 'bg-sky-500/10',
-    metric: '10×',
-    metricLabel: 'ROI for agency clients',
+    metricLabel: 'fully automated',
   },
 ];
 
 export default function Testimonials() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const sectionRef =
+    useRef<HTMLElement>(null);
+
+  const headingRef =
+    useRef<HTMLDivElement>(null);
+
+  const trackRef =
+    useRef<HTMLDivElement>(null);
+
+  const cardsRef =
+    useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading entrance
-      gsap.fromTo(headingRef.current?.children ?? [],
-        { y: 40, opacity: 0 },
+      /**
+       * HEADER REVEAL
+       */
+      gsap.fromTo(
+        headingRef.current?.children ?? [],
         {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 95%',
-            once: true,
-          },
-          y: 0,
+          opacity: 0,
+          y: 32,
+        },
+        {
           opacity: 1,
-          duration: 0.9,
-          stagger: 0.12,
+          y: 0,
+          stagger: 0.08,
+          duration: 1,
           ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 88%',
+          },
         }
       );
 
-      // Cards cascade in
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll('.testi-card');
-        gsap.fromTo(cards,
-          { y: 70, opacity: 0, scale: 0.92 },
-          {
-            scrollTrigger: {
-              trigger: gridRef.current,
-              start: 'top 95%',
-              once: true,
-            },
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.85,
-            stagger: 0.1,
-            ease: 'power3.out',
-          }
-        );
+      /**
+       * CARDS REVEAL
+       */
+      const cards =
+        cardsRef.current?.querySelectorAll(
+          '.testimonial-card'
+        ) ?? [];
+
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 80,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.12,
+          duration: 1.1,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 88%',
+          },
+        }
+      );
+
+      /**
+       * HORIZONTAL SCROLL
+       */
+      if (trackRef.current) {
+        const totalScroll =
+          trackRef.current.scrollWidth -
+          window.innerWidth;
+
+        gsap.to(trackRef.current, {
+          x: -totalScroll,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: () =>
+              `+=${totalScroll + 1400}`,
+            scrub: 1.1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
       }
 
-      // Glow parallax
-      gsap.to('.testi-glow-1', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 2,
-        },
-        y: -100,
-        ease: 'none',
+      /**
+       * FLOATING DEPTH
+       */
+      cards.forEach((card: Element, i: number) => {
+        gsap.to(card, {
+          y: i % 2 === 0 ? -16 : 16,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            scrub: true,
+          },
+        });
       });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  const scroll = (
+    direction: 'left' | 'right'
+  ) => {
+    if (!cardsRef.current) return;
+
+    const amount =
+      window.innerWidth < 768 ? 360 : 580;
+
+    cardsRef.current.scrollBy({
+      left:
+        direction === 'left'
+          ? -amount
+          : amount,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <section ref={sectionRef} id="testimonials" className="py-28 bg-transparent relative overflow-hidden z-20">
-      {/* Decorative glows */}
-      <div className="testi-glow-1 absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-indigo-600/8 blur-[150px] rounded-full pointer-events-none" />
+    <section
+      ref={sectionRef}
+      id="testimonials"
+      className="relative bg-black text-white overflow-hidden"
+    >
+      {/* HEIGHT FOR STICKY */}
+      <div className="relative h-[340vh]">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* STICKY CONTAINER */}
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
 
-        {/* Header */}
-        <div ref={headingRef} className="text-center max-w-3xl mx-auto mb-20">
-          <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-indigo-400 tracking-wider uppercase mb-6">
-            What creators say
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-5">
-            Real results from{' '}
-            <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              real creators
-            </span>
-          </h2>
-          <p className="text-base md:text-lg text-white/50 leading-relaxed">
-            2,400+ creators ship more content in less time. Here's what they actually say.
-          </p>
-        </div>
+          {/* MAIN WRAPPER */}
+          <div className="relative w-full">
 
-        {/* Testimonials grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {testimonials.map((t, idx) => (
+            {/* HEADER */}
             <div
-              key={idx}
-              className={`testi-card group relative p-7 rounded-3xl border backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 cursor-default ${
-                t.featured
-                  ? 'bg-white/[0.04] border-indigo-500/30 md:col-span-1'
-                  : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
-              }`}
+              ref={headingRef}
+              className="relative z-20 mb-24"
             >
-              {t.featured && (
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/8 to-purple-500/8 pointer-events-none" />
-              )}
+              <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-16">
 
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <FiStar key={i} className="w-3.5 h-3.5 fill-pink-400 text-pink-400" />
-                  ))}
-                </div>
+                {/* TOP LABEL */}
+                <div className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2.5 mb-10">
+                  <div className="w-2 h-2 rounded-full bg-white/80" />
 
-                {/* Quote */}
-                <p className="text-sm md:text-[15px] text-white/80 leading-relaxed mb-6 flex-grow font-light italic">
-                  "{t.quote}"
-                </p>
-
-                {/* Metric pill */}
-                <div className={`inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-xl ${t.bg} border border-white/10 mb-5`}>
-                  <span className={`text-base font-black bg-gradient-to-r ${t.gradient} bg-clip-text text-transparent`}>
-                    {t.metric}
+                  <span className="text-[10px] uppercase tracking-[0.34em] text-white/38">
+                    Testimonials
                   </span>
-                  <span className="text-[11px] text-white/40">{t.metricLabel}</span>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-white/5 mb-4" />
+                {/* MAIN GRID */}
+                <div className="grid xl:grid-cols-[1.1fr_0.9fr] gap-24 items-end">
 
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center flex-shrink-0`}>
-                    <span className="text-[11px] font-black text-white">{t.initials}</span>
+                  {/* LEFT */}
+                  <div className="max-w-5xl">
+
+                    <h2 className="text-[46px] sm:text-[72px] lg:text-[118px] leading-[0.86] tracking-[-0.085em] font-semibold">
+                      Trusted by creators
+                      <span className="block text-white/26">
+                        building modern media brands.
+                      </span>
+                    </h2>
+
+                    <p className="mt-10 max-w-2xl text-lg md:text-xl leading-[1.9] text-white/40">
+                      Thousands of creators,
+                      operators, and media teams
+                      use CreatorOS to scale
+                      content systems with
+                      consistency, automation,
+                      and operational clarity.
+                    </p>
                   </div>
-                  <div>
-                    <div className="text-sm font-bold text-white">{t.name}</div>
-                    <div className="text-xs text-white/40">{t.handle} · {t.platform}</div>
+
+                  {/* RIGHT */}
+                  <div className="flex flex-col items-start xl:items-end gap-14">
+
+                    {/* STATS */}
+                    <div className="grid grid-cols-2 gap-x-16 gap-y-12">
+                      {[
+                        [
+                          '4.9/5',
+                          'Average rating',
+                        ],
+                        [
+                          '2,400+',
+                          'Verified reviews',
+                        ],
+                        [
+                          '120M+',
+                          'Monthly impressions',
+                        ],
+                        [
+                          '94%',
+                          'Retention increase',
+                        ],
+                      ].map((item, i) => (
+                        <div key={i}>
+                          <div className="text-[42px] font-semibold tracking-[-0.05em]">
+                            {item[0]}
+                          </div>
+
+                          <div className="mt-3 text-[11px] uppercase tracking-[0.24em] text-white/28">
+                            {item[1]}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CONTROLS */}
+                    <div className="flex items-center gap-4">
+                      <button
+                        onClick={() =>
+                          scroll('left')
+                        }
+                        className="w-14 h-14 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 transition-all duration-300"
+                      >
+                        <ArrowLeft size={18} />
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          scroll('right')
+                        }
+                        className="w-14 h-14 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 transition-all duration-300"
+                      >
+                        <ArrowRight size={18} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Social proof bar */}
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-center">
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-2">
-              {['from-blue-500 to-indigo-500','from-pink-500 to-rose-500','from-emerald-500 to-teal-500','from-amber-400 to-orange-500','from-violet-500 to-purple-500'].map((g, i) => (
-                <div key={i} className={`w-8 h-8 rounded-full bg-gradient-to-br ${g} border-2 border-black flex items-center justify-center`}>
-                  <span className="text-[9px] font-bold text-white">
-                    {['JR','MK','TL','SP','AW'][i]}
-                  </span>
+            {/* HORIZONTAL TRACK */}
+            <div
+              ref={trackRef}
+              className="flex items-center gap-8 pl-6 sm:pl-8 lg:pl-16 pr-[12vw] will-change-transform"
+            >
+
+              {/* INTRO CARD */}
+              <div className="w-[440px] md:w-[540px] h-[620px] shrink-0">
+                <div className="relative h-full rounded-[42px] border border-white/10 bg-black p-14 flex flex-col justify-between overflow-hidden">
+
+                  {/* SUBTLE LIGHT */}
+                  <div className="absolute inset-x-0 top-0 h-40 bg-white/[0.015]" />
+
+                  {/* INNER BORDER */}
+                  <div className="absolute inset-0 rounded-[42px] ring-1 ring-white/[0.03]" />
+
+                  <div className="relative z-10">
+                    <span className="text-[10px] uppercase tracking-[0.32em] text-white/30">
+                      Creator Stories
+                    </span>
+
+                    <h3 className="mt-8 text-[58px] leading-[0.92] tracking-[-0.07em] font-semibold">
+                      Real growth.
+                      <span className="block text-white/26">
+                        Real systems.
+                      </span>
+                    </h3>
+                  </div>
+
+                  <p className="relative z-10 text-lg leading-[1.9] text-white/38 max-w-[90%]">
+                    Scroll horizontally to
+                    explore how modern creators
+                    use CreatorOS to automate
+                    workflows and scale content
+                    operations.
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              {/* CARDS */}
+              <div
+                ref={cardsRef}
+                className="flex items-center gap-8"
+              >
+                {testimonials.map((t, idx) => (
+                  <div
+                    key={idx}
+                    className={`testimonial-card relative overflow-hidden w-[400px] md:w-[560px] h-[620px] shrink-0 rounded-[42px] border bg-black p-12 md:p-14 flex flex-col transition-all duration-500 ${t.featured
+                        ? 'border-white/18'
+                        : 'border-white/10'
+                      } hover:border-white/20`}
+                  >
+
+                    {/* TOP LIGHT */}
+                    <div className="absolute inset-x-0 top-0 h-40 bg-white/[0.015]" />
+
+                    {/* INNER BORDER */}
+                    <div className="absolute inset-0 rounded-[42px] ring-1 ring-white/[0.03]" />
+
+                    {/* CONTENT */}
+                    <div className="relative z-10 flex flex-col h-full">
+
+                      {/* STARS */}
+                      <div className="flex items-center gap-1 mb-12">
+                        {[...Array(5)].map(
+                          (_, i) => (
+                            <Star
+                              key={i}
+                              className="w-4 h-4 fill-white text-white"
+                            />
+                          )
+                        )}
+                      </div>
+
+                      {/* QUOTE */}
+                      <div className="flex-1">
+                        <p className="text-[31px] md:text-[38px] leading-[1.48] tracking-[-0.05em] text-white/92">
+                          “{t.quote}”
+                        </p>
+                      </div>
+
+                      {/* METRIC */}
+                      <div className="mt-14 flex items-center gap-5">
+                        <span className="text-[44px] font-semibold tracking-[-0.06em]">
+                          {t.metric}
+                        </span>
+
+                        <div className="w-px h-5 bg-white/10" />
+
+                        <span className="text-[11px] uppercase tracking-[0.28em] text-white/28">
+                          {t.metricLabel}
+                        </span>
+                      </div>
+
+                      {/* DIVIDER */}
+                      <div className="w-full h-px bg-white/10 my-10" />
+
+                      {/* FOOTER */}
+                      <div className="flex items-center gap-5">
+
+                        {/* AVATAR */}
+                        <div className="w-16 h-16 rounded-[22px] border border-white/10 bg-white/[0.02] flex items-center justify-center text-sm font-semibold text-white/85">
+                          {t.initials}
+                        </div>
+
+                        {/* USER */}
+                        <div className="flex flex-col">
+                          <span className="text-lg font-medium tracking-[-0.02em]">
+                            {t.name}
+                          </span>
+
+                          <span className="mt-1 text-sm text-white/35">
+                            {t.handle} ·{' '}
+                            {t.platform}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* END SPACING */}
+                <div className="w-[20vw] shrink-0" />
+              </div>
             </div>
-            <span className="text-sm text-white/50 ml-1">2,400+ creators</span>
+
+            {/* FOOTER */}
+            <div className="mt-24 flex items-center justify-center gap-5 text-[10px] uppercase tracking-[0.34em] text-white/18">
+              <div className="w-20 h-px bg-white/10" />
+
+              CreatorOS powers next-generation creator workflows
+
+              <div className="w-20 h-px bg-white/10" />
+            </div>
           </div>
-          <div className="hidden sm:block w-px h-6 bg-white/10" />
-          <div className="flex items-center gap-1.5">
-            {[...Array(5)].map((_, i) => (
-              <FiStar key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-            ))}
-            <span className="text-sm text-white/50 ml-1">4.9 / 5 average rating</span>
-          </div>
-          <div className="hidden sm:block w-px h-6 bg-white/10" />
-          <span className="text-sm text-white/50">5 free runs / month · no credit card</span>
         </div>
       </div>
     </section>

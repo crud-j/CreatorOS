@@ -1,246 +1,161 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useState } from 'react';
 import {
-  FiInstagram, FiTwitter, FiLinkedin, FiMail,
-  FiYoutube, FiBookOpen
-} from 'react-icons/fi';
+  Activity,
+  MessageSquare,
+  Calendar,
+  Cpu,
+  BarChart2,
+  TrendingUp,
+  Sparkles
+} from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const outputs = [
+const features = [
   {
-    platform: 'Reels Script',
-    icon: <FiInstagram className="w-4 h-4" />,
-    color: 'from-pink-500 to-rose-500',
-    bg: 'bg-pink-500/10',
-    border: 'border-pink-500/20',
-    glow: 'rgba(236,72,153,0.15)',
-    preview: `"I launched with zero followers and $0 revenue. Here's the thing nobody tells you about building in public..."`,
-    tag: 'Hook · 45 sec · Reels format',
+    title: "Viral moment detector",
+    desc: "AI scores every segment of your video for hook strength, emotional impact, and shareability. Your best clips, found automatically.",
+    icon: <Activity className="w-6 h-6" />,
+    accent: "text-sky-400",
+    bgHover: "group-hover:bg-sky-500/10",
+    borderHover: "group-hover:border-sky-500/30",
+    glow: "rgba(56, 189, 248, 0.12)",
   },
   {
-    platform: 'Tweet Thread',
-    icon: <FiTwitter className="w-4 h-4" />,
-    color: 'from-sky-400 to-blue-500',
-    bg: 'bg-sky-500/10',
-    border: 'border-sky-500/20',
-    glow: 'rgba(56,189,248,0.15)',
-    preview: `1/ I've been building my SaaS publicly for 90 days. The raw numbers, the brutal lessons, and what actually moved the needle...`,
-    tag: '12-tweet thread · Engagement-optimized',
+    title: "Brand voice AI",
+    desc: "Trained on your own writing. Every output passes a tone consistency check before you see it — nothing off-brand ever surfaces.",
+    icon: <MessageSquare className="w-6 h-6" />,
+    accent: "text-indigo-400",
+    bgHover: "group-hover:bg-indigo-500/10",
+    borderHover: "group-hover:border-indigo-500/30",
+    glow: "rgba(99, 102, 241, 0.12)",
   },
   {
-    platform: 'LinkedIn Essay',
-    icon: <FiLinkedin className="w-4 h-4" />,
-    color: 'from-blue-500 to-indigo-600',
-    bg: 'bg-blue-500/10',
-    border: 'border-blue-500/20',
-    glow: 'rgba(99,102,241,0.15)',
-    preview: `Six months ago I made a decision that felt stupid at the time: I decided to show my work before it was ready. Here's what happened...`,
-    tag: '~600 words · Authority tone',
+    title: "Smart content calendar",
+    desc: "Visual week/month planner. Drag to reschedule. Platform color-coding. Queue status at a glance.",
+    icon: <Calendar className="w-6 h-6" />,
+    accent: "text-fuchsia-400",
+    bgHover: "group-hover:bg-fuchsia-500/10",
+    borderHover: "group-hover:border-fuchsia-500/30",
+    glow: "rgba(232, 121, 249, 0.12)",
   },
   {
-    platform: 'Newsletter Section',
-    icon: <FiMail className="w-4 h-4" />,
-    color: 'from-amber-400 to-orange-500',
-    bg: 'bg-amber-500/10',
-    border: 'border-amber-500/20',
-    glow: 'rgba(251,191,36,0.15)',
-    preview: `This week's big lesson: transparency is a growth strategy, not just a personality trait. Let me show you the receipts...`,
-    tag: 'Substack-ready · Personal tone',
+    title: "Autopilot publishing",
+    desc: "Unattended robots publish to Meta, LinkedIn, X, and YouTube at your optimal windows. Engagement scraped back automatically.",
+    icon: <Cpu className="w-6 h-6" />,
+    accent: "text-rose-400",
+    bgHover: "group-hover:bg-rose-500/10",
+    borderHover: "group-hover:border-rose-500/30",
+    glow: "rgba(244, 63, 94, 0.12)",
   },
   {
-    platform: 'YT Community Post',
-    icon: <FiYoutube className="w-4 h-4" />,
-    color: 'from-red-500 to-rose-600',
-    bg: 'bg-red-500/10',
-    border: 'border-red-500/20',
-    glow: 'rgba(239,68,68,0.15)',
-    preview: `Dropped a new episode. One insight that changed how I think about audience growth — timestamps in the comments 👇`,
-    tag: 'Community post · CTR-optimized',
+    title: "Analytics dashboard",
+    desc: "See what's working across all platforms in one place. Weekly AI coach report delivered to your inbox every Sunday evening.",
+    icon: <BarChart2 className="w-6 h-6" />,
+    accent: "text-emerald-400",
+    bgHover: "group-hover:bg-emerald-500/10",
+    borderHover: "group-hover:border-emerald-500/30",
+    glow: "rgba(52, 211, 153, 0.12)",
   },
   {
-    platform: 'Pinterest Caption',
-    icon: <FiBookOpen className="w-4 h-4" />,
-    color: 'from-purple-500 to-violet-600',
-    bg: 'bg-purple-500/10',
-    border: 'border-purple-500/20',
-    glow: 'rgba(168,85,247,0.15)',
-    preview: `Building in public: the raw strategy that took me from 0 to 14K followers in 90 days. Save this for your next launch...`,
-    tag: 'SEO keywords · Discovery format',
-  },
+    title: "Trend scout agent",
+    desc: "Daily scan of trending topics in your niche. Pro users get auto-generated content briefs waiting for them every morning.",
+    icon: <TrendingUp className="w-6 h-6" />,
+    accent: "text-amber-400",
+    bgHover: "group-hover:bg-amber-500/10",
+    borderHover: "group-hover:border-amber-500/30",
+    glow: "rgba(251, 191, 36, 0.12)",
+  }
 ];
 
-export default function Examples() {
+export default function Features() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const chipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Badge + heading reveal
-      gsap.fromTo([chipRef.current, headingRef.current?.children],
-        { y: 40, opacity: 0 },
-        {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 95%',
-            once: true,
-          },
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          stagger: 0.12,
-          ease: 'power3.out',
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
         }
-      );
+      },
+      { threshold: 0.1 }
+    );
 
-      // Cards stagger in
-      if (cardsRef.current) {
-        const cards = cardsRef.current.querySelectorAll('.output-card');
-        gsap.fromTo(cards,
-          { y: 60, opacity: 0, scale: 0.94 },
-          {
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: 'top 95%',
-              once: true,
-            },
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
-          }
-        );
-      }
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      // Floating glow parallax
-      gsap.to('.examples-glow-1', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.5,
-        },
-        y: -80,
-        ease: 'none',
-      });
-      gsap.to('.examples-glow-2', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 2,
-        },
-        y: 80,
-        ease: 'none',
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} id="examples" className="py-28 bg-transparent relative overflow-hidden z-20">
-      {/* Decorative glows */}
-      <div className="examples-glow-1 absolute top-20 left-1/4 w-[500px] h-[500px] bg-pink-600/8 blur-[140px] rounded-full pointer-events-none" />
-      <div className="examples-glow-2 absolute bottom-20 right-1/4 w-[400px] h-[400px] bg-indigo-600/8 blur-[140px] rounded-full pointer-events-none" />
+    <section ref={sectionRef} id="features" className="py-32 bg-[#030303] text-white relative overflow-hidden z-20 font-sans selection:bg-white selection:text-black">
+
+      {/* Premium Ambient Glows */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-500/[0.02] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/[0.02] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div ref={chipRef}>
-            <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-pink-400 tracking-wider uppercase mb-6">
-              Examples
-            </span>
-          </div>
-          <div ref={headingRef}>
-            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-5">
-              What comes out of one&nbsp;
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
-                20-minute video
-              </span>
-            </h2>
-            <p className="text-base md:text-lg text-white/50 leading-relaxed">
-              From a single podcast episode on "building in public" — here's everything CreatorOS generates, ready to post across every channel.
-            </p>
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+          <div className="max-w-3xl">
+            <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] text-xs font-medium tracking-wide text-neutral-400 mb-8 backdrop-blur-md">
+                <Sparkles className="w-3.5 h-3.5 text-neutral-300" />
+                <span>The Arsenal</span>
+              </div>
+            </div>
+
+            <div className={`space-y-6 transition-all duration-1000 delay-150 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-white">
+                Everything a <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400 italic font-light">solo creator</span> needs.
+              </h2>
+              <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light max-w-2xl">
+                No video editor. No social media manager. No scheduling app. Our platform replaces all three with a unified, intelligent workflow.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Source pill */}
-        <div className="flex justify-center mb-12">
-          <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-            <div className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
-            <span className="text-sm text-white/60">Input: <span className="text-white font-medium">"Building in public" — Episode 47 · 22 min · Podcast</span></span>
-            <span className="text-xs text-emerald-400 font-bold px-2 py-0.5 rounded-full bg-emerald-400/10 border border-emerald-400/20 ml-2">
-              30 outputs generated
-            </span>
-          </div>
-        </div>
-
-        {/* Output cards grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {outputs.map((item, idx) => (
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
             <div
               key={idx}
-              className={`output-card group relative p-6 rounded-3xl bg-white/[0.02] border ${item.border} backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.05] hover:-translate-y-1 cursor-default`}
-              style={{ '--glow-color': item.glow } as React.CSSProperties}
+              className={`group relative p-8 rounded-[2rem] border border-white/[0.05] bg-white/[0.02] backdrop-blur-md transition-all duration-700 ease-out hover:-translate-y-2 hover:bg-white/[0.03] overflow-hidden ${feature.borderHover} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: isVisible ? `${300 + idx * 100}ms` : '0ms' }}
             >
-              {/* Hover glow overlay */}
+              {/* Dynamic Hover Glow */}
               <div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at center, ${item.glow} 0%, transparent 70%)` }}
+                className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{ background: `radial-gradient(600px circle at 0% 0%, ${feature.glow}, transparent 60%)` }}
               />
 
-              <div className="relative z-10">
-                {/* Platform label */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div className={`w-7 h-7 rounded-lg ${item.bg} flex items-center justify-center`}>
-                    <span className={`bg-gradient-to-br ${item.color} bg-clip-text text-transparent`}>
-                      {item.icon}
-                    </span>
-                  </div>
-                  <span className={`text-xs font-bold tracking-wider uppercase bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
-                    {item.platform}
-                  </span>
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Icon Container */}
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 bg-white/[0.03] border border-white/[0.05] shadow-inner text-neutral-400 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ${feature.bgHover} group-hover:${feature.accent}`}>
+                  {feature.icon}
                 </div>
 
-                {/* Preview text */}
-                <p className="text-sm text-white/75 leading-relaxed mb-5 font-light italic line-clamp-3">
-                  {item.preview}
-                </p>
+                {/* Content */}
+                <div className="flex-1">
+                  <h4 className="text-xl font-semibold mb-4 text-white tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-neutral-400 transition-all duration-300">
+                    {feature.title}
+                  </h4>
 
-                {/* Divider */}
-                <div className="h-px bg-white/5 mb-4" />
-
-                {/* Tag */}
-                <span className="text-[11px] text-white/30 tracking-wide font-medium">
-                  {item.tag}
-                </span>
+                  <p className="text-base text-neutral-400 leading-relaxed font-light group-hover:text-neutral-300 transition-colors duration-300">
+                    {feature.desc}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom summary row */}
-        <div className="mt-14 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {[
-            { label: '30+', sub: 'outputs per video' },
-            { label: '6', sub: 'platforms covered' },
-            { label: '4 min', sub: 'generation time' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center px-4 py-5 rounded-2xl bg-white/[0.02] border border-white/10">
-              <div className="text-2xl md:text-3xl font-black bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent mb-1">
-                {stat.label}
-              </div>
-              <div className="text-xs text-white/40 tracking-wide">{stat.sub}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

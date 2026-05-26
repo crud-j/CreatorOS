@@ -1,84 +1,241 @@
+import { useEffect, useRef } from 'react';
+import gsapActual from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+const gsapInstance = gsapActual;
+gsapInstance.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
-    num: "1",
-    title: "Drop your content",
-    desc: "Paste a YouTube URL, upload an MP4, or connect your podcast RSS feed. CreatorOS handles every format without transcription tools or manual prep.",
-    footer: "YouTube · MP4 · MP3 · Loom",
-    color: "from-indigo-500/10 to-blue-500/10",
-    border: "group-hover:border-indigo-500/50"
+    num: '01',
+    title: 'Upload your content',
+    desc:
+      'Paste a YouTube link, upload a podcast, or drop in raw media files. CreatorOS automatically structures and prepares every format for distribution.',
+    footer: 'YouTube · Podcasts · MP4 · Audio',
+    glow: 'from-orange-500/20 to-transparent',
   },
   {
-    num: "2",
-    title: "Train your brand voice once",
-    desc: "Paste 3 of your best posts. The AI learns your tone, sentence rhythm, humor style, and CTA patterns — every output sounds like you wrote it yourself.",
-    footer: "One-time setup · updates as you rate outputs",
-    color: "from-blue-500/10 to-purple-500/10",
-    border: "group-hover:border-blue-500/50"
+    num: '02',
+    title: 'Train your voice',
+    desc:
+      'The AI learns your tone, pacing, formatting patterns, and writing style so every generated asset feels authentically yours.',
+    footer: 'Adaptive AI · One-time setup',
+    glow: 'from-amber-400/20 to-transparent',
   },
   {
-    num: "3",
-    title: "Get 30 platform-ready outputs",
-    desc: "Reels scripts, tweet threads, LinkedIn essays, newsletters, Pinterest captions, and YouTube community posts — all generated in parallel, all in your voice.",
-    footer: "Generated in under 4 minutes",
-    color: "from-purple-500/10 to-pink-500/10",
-    border: "group-hover:border-purple-500/50"
+    num: '03',
+    title: 'Generate platform-native content',
+    desc:
+      'Instantly create tweet threads, LinkedIn posts, captions, newsletters, hooks, scripts, and multi-platform content systems.',
+    footer: '30+ outputs generated instantly',
+    glow: 'from-emerald-400/20 to-transparent',
   },
   {
-    num: "4",
-    title: "Autopilot publishes everything",
-    desc: "UiPath robots post to each platform at the AI-predicted best time. Engagement data feeds back in — your schedule gets smarter every week.",
-    footer: "Powered by UiPath automation",
-    color: "from-pink-500/10 to-rose-500/10",
-    border: "group-hover:border-pink-500/50"
-  }
+    num: '04',
+    title: 'Publish & optimize automatically',
+    desc:
+      'Schedule, distribute, and optimize content workflows while CreatorOS continuously improves performance using engagement data.',
+    footer: 'Automated publishing engine',
+    glow: 'from-cyan-400/20 to-transparent',
+  },
 ];
 
 export default function HowItWorks() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsapInstance.context(() => {
+
+      // Heading animation
+      gsapInstance.fromTo(
+        headingRef.current?.children ?? [],
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 82%',
+            once: true,
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.12,
+          ease: 'power3.out',
+        }
+      );
+
+      // Cards animation
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll('.step-card');
+
+        gsapInstance.fromTo(
+          cards,
+          {
+            y: 60,
+            opacity: 0,
+            scale: 0.96,
+          },
+          {
+            scrollTrigger: {
+              trigger: gridRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            stagger: 0.12,
+            ease: 'power3.out',
+          }
+        );
+      }
+
+      // Ambient floating gradients
+      gsapInstance.to('.ambient-gradient-left', {
+        y: -120,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          scrub: 1,
+          start: 'top bottom',
+          end: 'bottom top',
+        },
+      });
+
+      gsapInstance.to('.ambient-gradient-right', {
+        y: 120,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          scrub: 1,
+          start: 'top bottom',
+          end: 'bottom top',
+        },
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="how-it-works" className="py-24 bg-transparent relative overflow-hidden z-20">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[500px] bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-indigo-400 tracking-wider uppercase mb-6">
-            How it works
-          </span>
-          <h3 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-            From raw content to 30 posts in 4 steps
-          </h3>
+    <section
+      ref={sectionRef}
+      id="how-it-works"
+      className="relative overflow-hidden bg-black py-32 lg:py-40 text-white"
+    >
+
+      {/* Ambient Background Gradients */}
+      <div className="ambient-gradient-left absolute -top-40 left-[-10%] w-[500px] h-[500px] rounded-full bg-orange-500/10 blur-[140px] pointer-events-none" />
+
+      <div className="ambient-gradient-right absolute bottom-[-200px] right-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/10 blur-[140px] pointer-events-none" />
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_45%)] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+        {/* Header */}
+        <div
+          ref={headingRef}
+          className="max-w-4xl mx-auto text-center mb-28"
+        >
+
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 backdrop-blur-xl mb-8">
+            <div className="w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_12px_rgba(251,146,60,0.8)]" />
+
+            <span className="text-[11px] uppercase tracking-[0.3em] text-white/50 font-medium">
+              How It Works
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-5xl md:text-7xl lg:text-[82px] font-semibold tracking-[-0.06em] leading-[0.92]">
+            Turn one piece of content
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/30">
+              into an entire content engine.
+            </span>
+          </h2>
+
+          {/* Description */}
+          <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed text-white/50">
+            CreatorOS transforms long-form content into premium,
+            platform-native distribution systems — optimized for every
+            channel automatically.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Steps Grid */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+        >
           {steps.map((step, idx) => (
-            <div 
-              key={idx} 
-              className={`group relative p-8 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.04] hover:-translate-y-2 ${step.border}`}
+            <div
+              key={idx}
+              className="step-card group relative rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:-translate-y-1"
             >
-              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
-              
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="text-6xl font-black text-white/5 mb-8 group-hover:text-white/10 transition-colors duration-500">
-                  {step.num}
+
+              {/* Gradient Hover Glow */}
+              <div
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br ${step.glow}`}
+              />
+
+              {/* Inner Top Light */}
+              <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/[0.04] to-transparent opacity-60" />
+
+              {/* Large Number */}
+              <div className="absolute top-6 right-6 text-[90px] font-semibold tracking-[-0.08em] text-white/[0.04] select-none leading-none">
+                {step.num}
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full p-8 lg:p-10">
+
+                {/* Top Line */}
+                <div className="w-12 h-px bg-gradient-to-r from-white/60 to-transparent mb-10 transition-all duration-500 group-hover:w-20" />
+
+                {/* Step */}
+                <div className="mb-8">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/35 font-medium">
+                    Step {step.num}
+                  </span>
                 </div>
-                
-                <h4 className="text-xl font-bold text-white mb-4">
+
+                {/* Title */}
+                <h3 className="text-2xl font-medium tracking-tight leading-tight text-white mb-5 max-w-[260px]">
                   {step.title}
-                </h4>
-                
-                <p className="text-sm text-white/60 leading-relaxed mb-8 flex-grow">
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm leading-7 text-white/50 flex-grow">
                   {step.desc}
                 </p>
-                
-                <div className="pt-4 border-t border-white/10 mt-auto">
-                  <span className="text-[11px] font-bold text-indigo-300/70 tracking-wider uppercase group-hover:text-indigo-400 transition-colors duration-300">
+
+                {/* Divider */}
+                <div className="mt-12 pt-6 border-t border-white/10">
+                  <span className="text-[11px] uppercase tracking-[0.22em] text-white/30">
                     {step.footer}
                   </span>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom Statement */}
+        <div className="mt-28 text-center">
+          <div className="inline-flex items-center gap-3 text-white/25 text-xs uppercase tracking-[0.35em]">
+            <div className="w-12 h-px bg-white/10" />
+
+            Built for modern creators & media teams
+
+            <div className="w-12 h-px bg-white/10" />
+          </div>
         </div>
       </div>
     </section>

@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
+/* ── Design Tokens (light + dark mode) ────────────── */
+@import "./theme.css";
+
 /* ── Base ─────────────────────────────────────────── */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-page-bg);
+  color: var(--color-page-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ── Hero headline gradient accent ────────────────── */
@@ -34,3 +40,18 @@ body {
 .hero-animate-delay-1 { animation-delay: 0.15s; }
 .hero-animate-delay-2 { animation-delay: 0.3s; }
 .hero-animate-delay-3 { animation-delay: 0.45s; }
+
+/* ── Theme-aware smooth transition ────────────────── */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Exclude animation-heavy elements from the blanket transition */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}

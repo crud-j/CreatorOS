@@ -1,0 +1,269 @@
+/* =============================================================
+   CreatorOS — Design Token System
+   File: src/theme.css
+
+   PURPOSE
+   -------
+   This file is the SINGLE SOURCE OF TRUTH for all colors,
+   surfaces, borders, and shadows used across the landing page.
+
+   HOW IT WORKS
+   ------------
+   CSS custom properties are declared under :root (light mode)
+   and overridden under .dark (dark mode).
+   Components read these variables — never raw hex colors.
+
+   HOW TO REFINE
+   -------------
+   1. Change a value in :root  → affects light mode everywhere
+   2. Change a value in .dark  → affects dark mode everywhere
+   3. Add a new token below    → use it in any component via var(--token)
+
+   COLOUR PALETTE REFERENCE
+   ------------------------
+   Brand:     Indigo + Pink/Rose  (primary actions)
+   Accent:    Emerald (status), Amber (stars), Purple (features)
+   Neutral:   Slate scale (text, borders, backgrounds)
+   Glow:      Semi-transparent tinted blobs for depth
+
+   ============================================================= */
+
+/* ── Light Mode (default) ─────────────────────────────────── */
+:root {
+  /* ── Page base ── */
+  --color-page-bg:          #ffffff;        /* Main page background */
+  --color-page-text:        #0f172a;        /* Slate-900 — primary text */
+  --color-page-text-muted:  #475569;        /* Slate-600 — secondary text */
+  --color-page-text-faint:  #94a3b8;        /* Slate-400 — placeholder / meta */
+
+  /* ── Surface (cards, modals, inputs) ── */
+  --color-surface:          #ffffff;        /* Card / panel background */
+  --color-surface-raised:   #f8fafc;        /* Slate-50 — elevated surface */
+  --color-surface-hover:    #f1f5f9;        /* Slate-100 — hover state */
+
+  /* ── Border ── */
+  --color-border:           #e2e8f0;        /* Slate-200 — default border */
+  --color-border-strong:    #cbd5e1;        /* Slate-300 — emphasized border */
+  --color-border-subtle:    rgba(0,0,0,0.06); /* Very faint internal divider */
+
+  /* ── Navigation / CardNav ── */
+  --color-nav-bg:           rgba(255,255,255,0.72); /* Glassmorphism base */
+  --color-nav-text:         #0f172a;        /* Nav label / burger icon */
+  --color-nav-border:       #e2e8f0;        /* Nav pill border */
+  /* Card slot backgrounds (the 3 dropdown cards) */
+  --color-nav-card-product: #f1f5f9;        /* Slate-100 */
+  --color-nav-card-product-text: #0f172a;
+  --color-nav-card-resources: #e0e7ff;      /* Indigo-100 */
+  --color-nav-card-resources-text: #1e3a8a;
+  --color-nav-card-company: #fce7f3;        /* Pink-100 */
+  --color-nav-card-company-text: #831843;
+
+  /* ── Brand / Primary (Indigo) ── */
+  --color-brand:            #4f46e5;        /* Indigo-600 */
+  --color-brand-light:      #6366f1;        /* Indigo-500 */
+  --color-brand-dark:       #4338ca;        /* Indigo-700 */
+  --color-brand-bg:         #eef2ff;        /* Indigo-50 — tinted chip bg */
+  --color-brand-border:     #c7d2fe;        /* Indigo-200 */
+  --color-brand-text:       #4f46e5;        /* Indigo text on light chips */
+  --color-brand-glow:       rgba(79,70,229,0.18);
+
+  /* ── Accent / Secondary (Pink-Rose) ── */
+  --color-accent:           #ec4899;        /* Pink-500 */
+  --color-accent-light:     #f472b6;        /* Pink-400 */
+  --color-accent-dark:      #db2777;        /* Pink-600 */
+  --color-accent-bg:        #fdf2f8;        /* Pink-50 */
+  --color-accent-border:    #fbcfe8;        /* Pink-200 */
+  --color-accent-text:      #be185d;        /* Pink-700 */
+  --color-accent-glow:      rgba(236,72,153,0.15);
+
+  /* ── Emerald (status / success) ── */
+  --color-success:          #10b981;        /* Emerald-500 */
+  --color-success-bg:       #ecfdf5;        /* Emerald-50 */
+  --color-success-border:   #a7f3d0;        /* Emerald-200 */
+  --color-success-text:     #065f46;        /* Emerald-800 */
+
+  /* ── Amber (stars / warm accents) ── */
+  --color-warn:             #f59e0b;        /* Amber-500 */
+  --color-warn-bg:          #fffbeb;        /* Amber-50 */
+  --color-warn-text:        #92400e;        /* Amber-800 */
+
+  /* ── Feature icon backgrounds (Features section) ── */
+  --color-feat-blue-bg:     #eff6ff;        /* Blue-50 */
+  --color-feat-blue-icon:   #2563eb;        /* Blue-600 */
+  --color-feat-indigo-bg:   #eef2ff;        /* Indigo-50 */
+  --color-feat-indigo-icon: #4f46e5;
+  --color-feat-purple-bg:   #faf5ff;        /* Purple-50 */
+  --color-feat-purple-icon: #7c3aed;
+  --color-feat-rose-bg:     #fff1f2;        /* Rose-50 */
+  --color-feat-rose-icon:   #e11d48;
+  --color-feat-emerald-bg:  #ecfdf5;        /* Emerald-50 */
+  --color-feat-emerald-icon:#059669;
+  --color-feat-amber-bg:    #fffbeb;        /* Amber-50 */
+  --color-feat-amber-icon:  #d97706;
+
+  /* ── Decorative ambient glow blobs ── */
+  --color-blob-purple:      rgba(167,139,250,0.25);   /* Purple glow */
+  --color-blob-blue:        rgba(147,197,253,0.25);   /* Blue glow */
+  --color-blob-pink:        rgba(249,168,212,0.25);   /* Pink glow */
+  --color-blob-indigo:      rgba(165,180,252,0.20);   /* Indigo glow */
+
+  /* ── Hero animated background (ColorBends) ── */
+  --color-bends-a:          #a5b4fc;        /* Indigo-300 */
+  --color-bends-b:          #f9a8d4;        /* Pink-300 */
+
+  /* ── Shadow tokens ── */
+  --shadow-sm:   0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:   0 8px 30px rgba(0,0,0,0.10);
+  --shadow-brand:0 8px 24px rgba(79,70,229,0.22);
+  --shadow-accent:0 8px 24px rgba(236,72,153,0.22);
+
+  /* ── Selection highlight ── */
+  --color-selection-bg:     #e0e7ff;        /* Indigo-100 */
+  --color-selection-text:   #312e81;        /* Indigo-900 */
+}
+
+/* ── Dark Mode ─────────────────────────────────────────────── */
+/*
+   Applied when the <html> element has class="dark"
+   Toggle is managed by ThemeContext.tsx + CardNav toggle button.
+
+   DARK PALETTE PHILOSOPHY
+   ───────────────────────
+   • Background: Deep cool-gray (not pure black) for depth
+   • Surfaces: Slightly lighter than page, with subtle blue tint
+   • Text: Near-white primary, medium-gray secondary
+   • Brand colors stay vibrant — slightly lighter for contrast
+   • Borders become very faint so they don't dominate
+   • Glows become more prominent (they pop on dark backgrounds)
+*/
+.dark {
+  /* ── Page base ── */
+  --color-page-bg:          #0d0f14;        /* Deep space gray */
+  --color-page-text:        #f8fafc;        /* Slate-50 */
+  --color-page-text-muted:  #cbd5e1;        /* Slate-300 - brighter for legibility */
+  --color-page-text-faint:  #64748b;        /* Slate-500 */
+
+  /* ── Surface ── */
+  --color-surface:          #161b27;        /* Slightly lighter than page */
+  --color-surface-raised:   #1e2535;        /* Card / panel */
+  --color-surface-hover:    #242c3d;        /* Hover state */
+
+  /* ── Border ── */
+  --color-border:           rgba(255,255,255,0.15); /* Slightly more visible divider */
+  --color-border-strong:    rgba(255,255,255,0.25);
+  --color-border-subtle:    rgba(255,255,255,0.08);
+
+  /* ── Navigation / CardNav ── */
+  --color-nav-bg:           rgba(22,27,39,0.82);   /* Dark glass */
+  --color-nav-text:         #f1f5f9;
+  --color-nav-border:       rgba(255,255,255,0.10);
+  --color-nav-card-product: #1e2535;
+  --color-nav-card-product-text: #e2e8f0;
+  --color-nav-card-resources: #1a1f35;      /* Dark indigo tint */
+  --color-nav-card-resources-text: #a5b4fc;
+  --color-nav-card-company: #251828;        /* Dark pink tint */
+  --color-nav-card-company-text: #f9a8d4;
+
+  /* ── Brand (Indigo — brighter in dark for legibility) ── */
+  --color-brand:            #818cf8;        /* Indigo-400 */
+  --color-brand-light:      #a5b4fc;        /* Indigo-300 */
+  --color-brand-dark:       #6366f1;        /* Indigo-500 */
+  --color-brand-bg:         rgba(99,102,241,0.15);
+  --color-brand-border:     rgba(99,102,241,0.30);
+  --color-brand-text:       #a5b4fc;        /* Indigo-300 */
+  --color-brand-glow:       rgba(99,102,241,0.30);
+
+  /* ── Accent (Pink) ── */
+  --color-accent:           #f472b6;        /* Pink-400 */
+  --color-accent-light:     #f9a8d4;        /* Pink-300 */
+  --color-accent-dark:      #ec4899;        /* Pink-500 */
+  --color-accent-bg:        rgba(236,72,153,0.12);
+  --color-accent-border:    rgba(236,72,153,0.28);
+  --color-accent-text:      #f9a8d4;        /* Pink-300 */
+  --color-accent-glow:      rgba(236,72,153,0.25);
+
+  /* ── Emerald ── */
+  --color-success:          #34d399;        /* Emerald-400 */
+  --color-success-bg:       rgba(16,185,129,0.12);
+  --color-success-border:   rgba(16,185,129,0.28);
+  --color-success-text:     #6ee7b7;        /* Emerald-300 */
+
+  /* ── Amber ── */
+  --color-warn:             #fbbf24;        /* Amber-400 */
+  --color-warn-bg:          rgba(245,158,11,0.12);
+  --color-warn-text:        #fde68a;        /* Amber-200 */
+
+  /* ── Feature icon backgrounds ── */
+  --color-feat-blue-bg:     rgba(37,99,235,0.15);
+  --color-feat-blue-icon:   #93c5fd;        /* Blue-300 */
+  --color-feat-indigo-bg:   rgba(99,102,241,0.15);
+  --color-feat-indigo-icon: #a5b4fc;
+  --color-feat-purple-bg:   rgba(124,58,237,0.15);
+  --color-feat-purple-icon: #c4b5fd;        /* Purple-300 */
+  --color-feat-rose-bg:     rgba(225,29,72,0.15);
+  --color-feat-rose-icon:   #fda4af;        /* Rose-300 */
+  --color-feat-emerald-bg:  rgba(5,150,105,0.15);
+  --color-feat-emerald-icon:#6ee7b7;
+  --color-feat-amber-bg:    rgba(217,119,6,0.15);
+  --color-feat-amber-icon:  #fde68a;
+
+  /* ── Decorative ambient glow blobs (stronger in dark) ── */
+  --color-blob-purple:      rgba(139,92,246,0.18);
+  --color-blob-blue:        rgba(99,102,241,0.18);
+  --color-blob-pink:        rgba(236,72,153,0.18);
+  --color-blob-indigo:      rgba(99,102,241,0.16);
+
+  /* ── Hero animated background (ColorBends) ── */
+  --color-bends-a:          #4338ca;        /* Indigo-700 — richer in dark */
+  --color-bends-b:          #9d174d;        /* Pink-800 */
+
+  /* ── Shadow tokens (less opaque in dark, rely on glows) ── */
+  --shadow-sm:   0 1px 2px rgba(0,0,0,0.40);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.50);
+  --shadow-lg:   0 8px 30px rgba(0,0,0,0.60);
+  --shadow-brand:0 8px 24px rgba(99,102,241,0.35);
+  --shadow-accent:0 8px 24px rgba(236,72,153,0.35);
+
+  /* ── Selection highlight ── */
+  --color-selection-bg:     rgba(99,102,241,0.35);
+  --color-selection-text:   #e0e7ff;
+}
+
+/* ── Utility classes wired to tokens ─────────────────────────
+   These are convenience classes you can use directly in JSX
+   instead of raw Tailwind colors, keeping components clean.
+   ─────────────────────────────────────────────────────────── */
+
+/* Page shell */
+.theme-page {
+  background-color: var(--color-page-bg);
+  color: var(--color-page-text);
+}
+
+/* Card / panel surface */
+.theme-surface {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.theme-surface-raised {
+  background-color: var(--color-surface-raised);
+}
+
+/* Text helpers */
+.theme-text          { color: var(--color-page-text); }
+.theme-text-muted    { color: var(--color-page-text-muted); }
+.theme-text-faint    { color: var(--color-page-text-faint); }
+.theme-text-brand    { color: var(--color-brand); }
+.theme-text-accent   { color: var(--color-accent); }
+
+/* Border */
+.theme-border        { border-color: var(--color-border); }
+.theme-border-strong { border-color: var(--color-border-strong); }
+
+/* Selection */
+::selection {
+  background-color: var(--color-selection-bg);
+  color:            var(--color-selection-text);
+}

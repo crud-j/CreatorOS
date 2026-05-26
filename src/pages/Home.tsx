@@ -9,10 +9,12 @@ import HowItWorks from '../components/HowItWorks';
 import Features from '../components/Features';
 import Examples from '../components/Examples';
 import Testimonials from '../components/Testimonials';
+import ContactSection from '../components/ContactSection';
 import Pricing from '../components/Pricing';
 import FAQ from '../components/FAQ';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
+import { useTheme } from '../ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,8 +32,8 @@ export default function Home() {
           end: 'bottom top',
           scrub: true,
         },
-        opacity: 0.15,
-        filter: 'blur(40px)',
+        opacity: 0.1,
+        filter: 'blur(60px)',
         ease: 'none',
       });
     });
@@ -39,22 +41,24 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
+  const { theme } = useTheme();
+
   return (
-    <div className="relative min-h-screen bg-black overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden theme-page">
       {/* Animated background — fades out on hero scroll */}
-      <div ref={bgRef} className="fixed inset-0 z-0 pointer-events-none">
+      <div ref={bgRef} className="fixed inset-0 z-0 pointer-events-none opacity-60">
         <ColorBends
-          className="w-full h-full"
-          colors={["#113b96ff", "#ff647eff"]}
+          className="w-full h-full no-transition"
+          colors={theme === 'dark' ? ['#4338ca', '#9d174d'] : ['#a5b4fc', '#f9a8d4']}
           speed={0.05}
-          scale={1}
+          scale={1.2}
           frequency={1.3}
           warpStrength={1}
           mouseInfluence={0.2}
-          noise={0.17}
+          noise={0.1}
           parallax={0.5}
           iterations={1}
-          intensity={1.5}
+          intensity={1.2}
           bandWidth={6}
           transparent
           autoRotate={1}
@@ -66,12 +70,13 @@ export default function Home() {
 
         {/* ── Hero ── */}
         <div ref={heroRef} className="relative min-h-screen flex flex-col">
+          {/* Nav card colors read from CSS variables at render time */}
           <CardNav
             items={[
               {
                 label: 'Product',
-                bgColor: '#0f172a', // slate-900
-                textColor: '#fff',
+                bgColor: 'var(--color-nav-card-product)',
+                textColor: 'var(--color-nav-card-product-text)',
                 links: [
                   { label: 'How it works', href: '#how-it-works', ariaLabel: 'How it works' },
                   { label: 'Features', href: '#features', ariaLabel: 'Features' },
@@ -80,8 +85,8 @@ export default function Home() {
               },
               {
                 label: 'Resources',
-                bgColor: '#312e81', // indigo-900
-                textColor: '#fff',
+                bgColor: 'var(--color-nav-card-resources)',
+                textColor: 'var(--color-nav-card-resources-text)',
                 links: [
                   { label: 'Wall of Love', href: '#testimonials', ariaLabel: 'Testimonials' },
                   { label: 'Pricing', href: '#pricing', ariaLabel: 'Pricing' },
@@ -90,12 +95,12 @@ export default function Home() {
               },
               {
                 label: 'Company',
-                bgColor: '#831843', // pink-900
-                textColor: '#fff',
+                bgColor: 'var(--color-nav-card-company)',
+                textColor: 'var(--color-nav-card-company-text)',
                 links: [
                   { label: 'Log In', href: '/login', ariaLabel: 'Log in' },
                   { label: 'Sign Up', href: '/signup', ariaLabel: 'Sign up' },
-                  { label: 'Contact', href: 'mailto:support@creatoros.com', ariaLabel: 'Contact us' }
+                  { label: 'Contact', href: '#contact', ariaLabel: 'Contact us' }
                 ]
               }
             ]}
@@ -114,6 +119,9 @@ export default function Home() {
 
         {/* ── Examples ── */}
         <Examples />
+
+        {/* ── Contact ── */}
+        <ContactSection />
 
         {/* ── Testimonials ── */}
         <Testimonials />
