@@ -77,12 +77,45 @@ export default function App() {
     };
 
     return (
-        <div id="contact" className="min-h-screen bg-[#030303] text-white font-sans antialiased selection:bg-white selection:text-black overflow-hidden py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div id="contact" className="min-h-screen bg-black text-white font-sans antialiased selection:bg-white selection:text-black overflow-hidden py-24 px-4 sm:px-6 lg:px-8 relative">
 
-            {/* Ambient Background Glows */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-white/[0.03] via-transparent to-transparent blur-3xl pointer-events-none" />
-            <div className="absolute top-1/4 -left-64 w-96 h-96 bg-indigo-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-purple-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
+            {/* PREMIUM BACKGROUND */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
+                {/* AMBIENT LIGHTING */}
+                <div className="absolute top-[-15%] left-[10%] w-[800px] h-[800px] rounded-full bg-white/[0.035] blur-[180px]" />
+
+                <div className="absolute bottom-[-20%] right-[5%] w-[700px] h-[700px] rounded-full bg-white/[0.025] blur-[180px]" />
+
+                {/* RADIAL LIGHT */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+
+                {/* PREMIUM DOT GRID */}
+                <div
+                    className="absolute inset-0 opacity-[0.12]"
+                    style={{
+                        backgroundImage:
+                            'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)',
+
+                        backgroundSize: '4px 4px',
+
+                        maskImage:
+                            'radial-gradient(circle at center top, black 18%, transparent 82%)',
+
+                        WebkitMaskImage:
+                            'radial-gradient(circle at center top, black 18%, transparent 82%)',
+                    }}
+                />
+
+                {/* VIGNETTE */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.5)_100%)]" />
+
+                {/* TOP FADE */}
+                <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black via-black/70 to-transparent" />
+
+                {/* BOTTOM FADE */}
+                <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-black via-black/80 to-transparent" />
+            </div>
 
             {/* Centralized, Massive, Low-Opacity Background Text */}
             <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none select-none z-0">

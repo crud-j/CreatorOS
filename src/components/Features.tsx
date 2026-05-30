@@ -11,8 +11,8 @@ import {
 
 const features = [
   {
-    title: "Viral moment detector",
-    desc: "AI scores every segment of your video for hook strength, emotional impact, and shareability. Your best clips, found automatically.",
+    title: "Viral moment scoring",
+    desc: "CreatorOS scores every segment for hook strength, valence, and density, then flags the five clips most likely to win feeds.",
     icon: <Activity className="w-6 h-6" />,
     accent: "text-sky-400",
     bgHover: "group-hover:bg-sky-500/10",
@@ -20,8 +20,8 @@ const features = [
     glow: "rgba(56, 189, 248, 0.12)",
   },
   {
-    title: "Brand voice AI",
-    desc: "Trained on your own writing. Every output passes a tone consistency check before you see it — nothing off-brand ever surfaces.",
+    title: "Voice-locked generation",
+    desc: "Your voice profile trains the system prompt and embeddings so every caption and script sounds like you, not a template.",
     icon: <MessageSquare className="w-6 h-6" />,
     accent: "text-indigo-400",
     bgHover: "group-hover:bg-indigo-500/10",
@@ -29,8 +29,8 @@ const features = [
     glow: "rgba(99, 102, 241, 0.12)",
   },
   {
-    title: "Smart content calendar",
-    desc: "Visual week/month planner. Drag to reschedule. Platform color-coding. Queue status at a glance.",
+    title: "Realtime output stream",
+    desc: "Outputs appear live as they are generated, so you can approve, edit, or regen without waiting on the full batch.",
     icon: <Calendar className="w-6 h-6" />,
     accent: "text-fuchsia-400",
     bgHover: "group-hover:bg-fuchsia-500/10",
@@ -38,8 +38,8 @@ const features = [
     glow: "rgba(232, 121, 249, 0.12)",
   },
   {
-    title: "Autopilot publishing",
-    desc: "Unattended robots publish to Meta, LinkedIn, X, and YouTube at your optimal windows. Engagement scraped back automatically.",
+    title: "UiPath autopublish",
+    desc: "Schedule once and let unattended robots post to Meta, LinkedIn, X, YouTube, and Pinterest at optimal windows.",
     icon: <Cpu className="w-6 h-6" />,
     accent: "text-rose-400",
     bgHover: "group-hover:bg-rose-500/10",
@@ -47,8 +47,8 @@ const features = [
     glow: "rgba(244, 63, 94, 0.12)",
   },
   {
-    title: "Analytics dashboard",
-    desc: "See what's working across all platforms in one place. Weekly AI coach report delivered to your inbox every Sunday evening.",
+    title: "Cross-platform analytics",
+    desc: "See reach, saves, and engagement in one dashboard, plus a weekly AI coach narrative tailored to your performance.",
     icon: <BarChart2 className="w-6 h-6" />,
     accent: "text-emerald-400",
     bgHover: "group-hover:bg-emerald-500/10",
@@ -56,8 +56,8 @@ const features = [
     glow: "rgba(52, 211, 153, 0.12)",
   },
   {
-    title: "Trend scout agent",
-    desc: "Daily scan of trending topics in your niche. Pro users get auto-generated content briefs waiting for them every morning.",
+    title: "Trend scout briefs",
+    desc: "Daily topic scans generate short, actionable briefs so you always have a ready-made angle to ship.",
     icon: <TrendingUp className="w-6 h-6" />,
     accent: "text-amber-400",
     bgHover: "group-hover:bg-amber-500/10",
@@ -112,10 +112,10 @@ export default function Features() {
 
             <div className={`space-y-6 transition-all duration-1000 delay-150 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-white">
-                Everything a <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400 italic font-light">solo creator</span> needs.
+                The CreatorOS <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400 italic font-light">stack</span>.
               </h2>
               <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light max-w-2xl">
-                No video editor. No social media manager. No scheduling app. Our platform replaces all three with a unified, intelligent workflow.
+                One upload becomes a full publishing system: transcripts, viral moments, platform-native outputs, and autopublish.
               </p>
             </div>
           </div>

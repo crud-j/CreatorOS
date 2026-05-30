@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import gsapActual from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -55,161 +56,231 @@ export default function Pricing() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
   const [annual, setAnnual] = useState(false);
 
   useEffect(() => {
     const ctx = gsapInstance.context(() => {
-      // Header Animation
       gsapInstance.fromTo(
         headingRef.current?.children ?? [],
-        { y: 30, opacity: 0 },
         {
+          y: 24,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.08,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 85%',
             once: true,
           },
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
         }
       );
 
-      // Cards Animation
       if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll('.pricing-card');
-        gsapInstance.fromTo(
-          cards,
-          { y: 50, opacity: 0, scale: 0.95 },
-          {
-            scrollTrigger: {
-              trigger: gridRef.current,
-              start: 'top 85%',
-              once: true,
-            },
-            y: 0,
-            opacity: 1,
-            scale: (idx) => (idx === 1 ? 1.08 : 1), // Feature card scale increased for emphasis
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power3.out',
-          }
-        );
+        const cards =
+          gridRef.current.querySelectorAll(
+            '.pricing-card'
+          );
+
+        gsapInstance.set(cards, {
+          opacity: 0,
+          y: 80,
+          rotateX: 8,
+          transformPerspective: 1200,
+        });
+
+        gsapInstance.to(cards, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 1.4,
+          stagger: 0.12,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: 'top 78%',
+            once: true,
+          },
+        });
       }
 
-      // Parallax Ambient Glow
-      gsapInstance.to('.pricing-ambient-glow', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-        y: -150,
-        ease: 'none',
-      });
+      gsapInstance.to(
+        '.pricing-ambient-glow',
+        {
+          yPercent: -18,
+          scale: 1.08,
+          opacity: 0.9,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2,
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="pricing" className="py-32 bg-[#020202] text-white relative overflow-hidden z-20">
-
-      {/* Deep Cyber Dot Matrix Background */}
+    <section
+      ref={sectionRef}
+      id="pricing"
+      className="relative overflow-hidden bg-[#020202] py-28 text-white"
+    >
+      {/* BACKGROUND */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.25]"
+        className="absolute inset-0 opacity-[0.22] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)',
+          backgroundImage:
+            'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)',
           backgroundSize: '4px 4px',
-          maskImage: 'radial-gradient(circle at center top, black 20%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(circle at center top, black 20%, transparent 80%)'
+          maskImage:
+            'radial-gradient(circle at center top, black 20%, transparent 80%)',
+          WebkitMaskImage:
+            'radial-gradient(circle at center top, black 20%, transparent 80%)',
         }}
       />
 
-      {/* Volumetric Orange to Green Cinematic Ambient Glow - Refined for wider horizontal spread */}
-      <div className="pricing-ambient-glow absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-r from-[#ff6b00]/30 via-transparent to-[#00ff88]/30 blur-[120px] rounded-[100%] pointer-events-none mix-blend-screen z-0" />
+      {/* AMBIENT GLOW */}
+      <div className="pricing-ambient-glow absolute top-[8%] left-1/2 -translate-x-1/2 w-[760px] h-[260px] rounded-full bg-gradient-to-r from-[#ff6b00]/25 via-transparent to-[#00ff88]/25 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* Header & Toggle Section */}
-        <div ref={headingRef} className="text-center mx-auto mb-16 relative z-10">
-
-          {/* Precision Toggle Switch */}
-          <div className="flex justify-center items-center gap-4 relative">
-            <span className={`text-[13px] font-medium transition-colors duration-300 ${!annual ? 'text-white' : 'text-[#777]'}`}>
+      <div className="relative z-10 max-w-[1120px] mx-auto px-6 lg:px-8">
+        {/* HEADER */}
+        <div
+          ref={headingRef}
+          className="mb-16 flex flex-col items-center"
+        >
+          <div className="inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-xl">
+            <span
+              className={`text-[12px] font-medium transition-colors duration-300 ${
+                !annual
+                  ? 'text-white'
+                  : 'text-white/35'
+              }`}
+            >
               Monthly
             </span>
 
             <button
-              onClick={() => setAnnual(!annual)}
-              className="relative w-[44px] h-[20px] rounded-full bg-gradient-to-r from-[#ff6b00] to-[#00ff88] flex items-center px-[2px] cursor-pointer shadow-[0_0_12px_rgba(255,107,0,0.2)]"
-              aria-label="Toggle Annual Billing"
+              onClick={() =>
+                setAnnual(!annual)
+              }
+              className="relative flex h-[22px] w-[46px] items-center rounded-full bg-gradient-to-r from-[#ff6b00] to-[#00ff88] px-[2px]"
             >
               <div
-                className={`w-[16px] h-[16px] rounded-full bg-white shadow-md transition-transform duration-300 ease-out ${annual ? 'translate-x-[24px]' : 'translate-x-0'
-                  }`}
+                className={`h-[18px] w-[18px] rounded-full bg-white transition-transform duration-300 ${
+                  annual
+                    ? 'translate-x-[24px]'
+                    : 'translate-x-0'
+                }`}
               />
             </button>
 
-            <span className={`text-[13px] font-medium transition-colors duration-300 ${annual ? 'text-white' : 'text-[#777]'}`}>
-              Annually
+            <span
+              className={`text-[12px] font-medium transition-colors duration-300 ${
+                annual
+                  ? 'text-white'
+                  : 'text-white/35'
+              }`}
+            >
+              Annual
             </span>
           </div>
+
+          <h2 className="mt-8 text-center text-[34px] sm:text-[48px] lg:text-[58px] leading-[0.95] tracking-[-0.055em] font-semibold">
+            Pricing designed
+            <span className="block text-white/22">
+              for modern creators.
+            </span>
+          </h2>
+
+          <p className="mt-5 max-w-[560px] text-center text-[14px] leading-[1.9] text-white/40">
+            Flexible plans built for
+            creators, teams, and agencies
+            scaling automated content
+            systems.
+          </p>
         </div>
 
-        {/* Pricing Cards Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch relative">
+        {/* GRID */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 gap-5 md:grid-cols-3 items-stretch"
+        >
           {plans.map((plan, idx) => {
             if (!plan.featured) {
               return (
                 <div
                   key={idx}
-                  className="pricing-card relative flex flex-col rounded-[20px] bg-[#070707] border border-white/[0.03] p-8 z-0 mt-2 shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)]"
+                  className="pricing-card relative flex flex-col rounded-[22px] border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-2xl shadow-[0_0_80px_rgba(0,0,0,0.3)] transition-transform duration-500 hover:-translate-y-1"
                 >
-                  <div className="mb-4">
-                    {plan.price.monthly === 0 ? (
-                      <h3 className="text-[44px] font-medium text-white tracking-tight mb-1">
+                  <div>
+                    {plan.price.monthly ===
+                    0 ? (
+                      <h3 className="text-[38px] tracking-[-0.05em] font-semibold">
                         {plan.tier}
                       </h3>
                     ) : (
-                      <div className="flex items-baseline gap-1 mb-1 mt-1">
-                        <span className="text-[42px] font-medium tracking-tight text-white">
-                          ${annual ? plan.price.annual : plan.price.monthly}.00
+                      <div className="flex items-end gap-1">
+                        <span className="text-[40px] tracking-[-0.05em] font-semibold">
+                          $
+                          {annual
+                            ? plan.price
+                                .annual
+                            : plan.price
+                                .monthly}
                         </span>
-                        <span className="text-[12px] font-medium text-[#777]">/month</span>
+
+                        <span className="mb-[8px] text-[11px] text-white/35">
+                          /month
+                        </span>
                       </div>
                     )}
-                    <p className="text-[13px] text-[#777] leading-relaxed min-h-[40px] mt-3">
+
+                    <p className="mt-4 text-[13px] leading-[1.8] text-white/38">
                       {plan.desc}
                     </p>
                   </div>
 
-                  <button className="w-full py-[14px] rounded-[10px] text-[13px] font-semibold bg-[#111111] border border-white/[0.04] text-[#888] hover:bg-[#1a1a1a] hover:text-[#aaa] transition-colors mt-2 shadow-inner">
+                  <button className="mt-7 h-[48px] rounded-[12px] border border-white/10 bg-white/[0.03] text-[13px] font-medium text-white/70 transition-all duration-300 hover:bg-white/[0.06] hover:text-white">
                     {plan.cta}
                   </button>
 
-                  <div className="relative flex items-center justify-center my-8 opacity-60">
-                    <div className="h-px bg-[#222] flex-1" />
-                    <span className="px-4 text-[9px] tracking-[0.25em] text-[#555] uppercase font-bold">
+                  <div className="my-7 flex items-center gap-4">
+                    <div className="h-px flex-1 bg-white/10" />
+
+                    <span className="text-[9px] uppercase tracking-[0.28em] text-white/20">
                       Features
                     </span>
-                    <div className="h-px bg-[#222] flex-1" />
+
+                    <div className="h-px flex-1 bg-white/10" />
                   </div>
 
-                  <ul className="space-y-[16px] flex-grow">
-                    {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-[16px] h-[16px] rounded-full border border-[#222] bg-[#0d0d0d] flex-shrink-0">
-                          <FiCheck className="w-2.5 h-2.5 text-[#333]" />
-                        </div>
-                        <span className="text-[13px] text-[#555] leading-snug">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
+                  <ul className="space-y-4">
+                    {plan.features.map(
+                      (feature, fIdx) => (
+                        <li
+                          key={fIdx}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
+                            <FiCheck className="h-2.5 w-2.5 text-white/45" />
+                          </div>
+
+                          <span className="text-[13px] text-white/42">
+                            {feature}
+                          </span>
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
               );
@@ -218,61 +289,74 @@ export default function Pricing() {
             return (
               <div
                 key={idx}
-                className="pricing-card relative flex flex-col rounded-[24px] z-10 md:scale-[1.08] shadow-[0_0_80px_-20px_rgba(0,0,0,0.8)]"
+                className="pricing-card relative flex flex-col rounded-[24px] transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02]"
               >
-                {/* Outer Ambient Glow - Stronger and deeper */}
-                <div className="absolute -inset-[1px] bg-gradient-to-r from-[#ff6b00] to-[#00ff88] rounded-[24px] blur-[22px] opacity-[0.85]" />
+                {/* OUTER GLOW */}
+                <div className="absolute -inset-[1px] rounded-[24px] bg-gradient-to-r from-[#ff6b00] to-[#00ff88] opacity-70 blur-[18px]" />
 
-                {/* Sharp 1.5px Border Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#ff8c33] via-[#f4e262] to-[#33ffaa] rounded-[24px] p-[1.5px]">
-                  {/* Inner background block */}
-                  <div className="absolute inset-[1.5px] bg-[#050505] rounded-[22.5px] overflow-hidden">
-                    {/* Soft Inner wash - Split into distinct corner lights for 3D depth */}
-                    <div className="absolute top-0 left-0 w-[60%] h-[300px] bg-[#ff6b00]/15 blur-[60px] rounded-full -translate-x-1/2 -translate-y-1/2" />
-                    <div className="absolute top-0 right-0 w-[60%] h-[300px] bg-[#00ff88]/15 blur-[60px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                {/* BORDER */}
+                <div className="absolute inset-0 rounded-[24px] bg-gradient-to-r from-[#ff8c33] via-[#f3d96b] to-[#33ffaa] p-[1px]">
+                  <div className="relative h-full rounded-[23px] bg-[#050505] overflow-hidden">
+                    <div className="absolute left-0 top-0 h-[240px] w-[50%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6b00]/15 blur-[70px]" />
 
-                    {/* Noise Texture */}
-                    <div className="absolute inset-0 opacity-[0.35] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+                    <div className="absolute right-0 top-0 h-[240px] w-[50%] translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00ff88]/15 blur-[70px]" />
                   </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="relative p-10 flex flex-col h-full z-10">
-                  <div className="mb-4">
-                    <div className="flex items-baseline gap-1 mb-1 mt-1">
-                      <span className="text-[44px] font-medium tracking-tight text-white drop-shadow-md">
-                        ${annual ? plan.price.annual : plan.price.monthly}.00
+                {/* CONTENT */}
+                <div className="relative z-10 flex h-full flex-col p-8">
+                  <div>
+                    <div className="flex items-end gap-1">
+                      <span className="text-[42px] tracking-[-0.055em] font-semibold">
+                        $
+                        {annual
+                          ? plan.price
+                              .annual
+                          : plan.price
+                              .monthly}
                       </span>
-                      <span className="text-[12px] font-medium text-neutral-400">/month</span>
+
+                      <span className="mb-[8px] text-[11px] text-white/45">
+                        /month
+                      </span>
                     </div>
-                    <p className="text-[13px] text-[#ddd] leading-relaxed min-h-[40px] mt-3 drop-shadow-sm">
+
+                    <p className="mt-4 text-[13px] leading-[1.8] text-white/55">
                       {plan.desc}
                     </p>
                   </div>
 
-                  <button className="w-full py-[14px] rounded-[10px] text-[13px] font-semibold text-black bg-gradient-to-b from-[#ffffff] to-[#e6e6e6] shadow-[0_0_24px_rgba(255,255,255,0.4)] transition-all hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.6)] mt-2">
+                  <button className="mt-7 h-[50px] rounded-[12px] bg-white text-[13px] font-semibold text-black transition-all duration-300 hover:scale-[1.01]">
                     {plan.cta}
                   </button>
 
-                  <div className="relative flex items-center justify-center my-8 opacity-90">
-                    <div className="h-px bg-[#333] flex-1" />
-                    <span className="px-4 text-[9px] tracking-[0.25em] text-[#777] uppercase font-bold">
+                  <div className="my-7 flex items-center gap-4">
+                    <div className="h-px flex-1 bg-white/10" />
+
+                    <span className="text-[9px] uppercase tracking-[0.28em] text-white/25">
                       Features
                     </span>
-                    <div className="h-px bg-[#333] flex-1" />
+
+                    <div className="h-px flex-1 bg-white/10" />
                   </div>
 
-                  <ul className="space-y-[16px] flex-grow">
-                    {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-[16px] h-[16px] rounded-full border border-[#444] bg-[#1a1a1a] flex-shrink-0 shadow-inner">
-                          <FiCheck className="w-2.5 h-2.5 text-[#999]" />
-                        </div>
-                        <span className="text-[13.5px] text-[#aaa] leading-snug font-medium">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
+                  <ul className="space-y-4">
+                    {plan.features.map(
+                      (feature, fIdx) => (
+                        <li
+                          key={fIdx}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
+                            <FiCheck className="h-2.5 w-2.5 text-white/60" />
+                          </div>
+
+                          <span className="text-[13px] text-white/65">
+                            {feature}
+                          </span>
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
               </div>
@@ -283,3 +367,4 @@ export default function Pricing() {
     </section>
   );
 }
+ 

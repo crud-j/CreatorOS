@@ -1,8 +1,13 @@
-import { useEffect, useRef } from 'react';
+import {
+  useEffect,
+  useRef,
+} from 'react';
+
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import CardNav from '../components/CardNav';
 import ColorBends from '../components/ColorBends';
+
 import HeroContent from '../components/HeroContent';
 import InteractiveSandbox from '../components/InteractiveSandbox';
 import HowItWorks from '../components/HowItWorks';
@@ -14,130 +19,271 @@ import Pricing from '../components/Pricing';
 import FAQ from '../components/FAQ';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
-import { useTheme } from '../ThemeContext';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const bgRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
+  const ambientOneRef =
+    useRef<HTMLDivElement>(null);
+
+  const ambientTwoRef =
+    useRef<HTMLDivElement>(null);
+
+  const heroGlowRef =
+    useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Fade + blur the animated background as user scrolls past the hero
-      gsap.to(bgRef.current, {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-        opacity: 0.1,
-        filter: 'blur(60px)',
-        ease: 'none',
-      });
+    /*
+      ULTRA SMOOTH FLOATING MOTION
+    */
+
+    gsap.to(ambientOneRef.current, {
+      x: 80,
+      y: -60,
+
+      duration: 16,
+
+      repeat: -1,
+
+      yoyo: true,
+
+      ease: 'sine.inOut',
     });
 
-    return () => ctx.revert();
+    gsap.to(ambientTwoRef.current, {
+      x: -60,
+      y: 50,
+
+      duration: 18,
+
+      repeat: -1,
+
+      yoyo: true,
+
+      ease: 'sine.inOut',
+    });
+
+    gsap.to(heroGlowRef.current, {
+      scale: 1.08,
+
+      opacity: 0.7,
+
+      duration: 8,
+
+      repeat: -1,
+
+      yoyo: true,
+
+      ease: 'sine.inOut',
+    });
   }, []);
 
-  const { theme } = useTheme();
-
   return (
-    <div className="relative min-h-screen overflow-x-hidden theme-page">
-      {/* Animated background — fades out on hero scroll */}
-      <div ref={bgRef} className="fixed inset-0 z-0 pointer-events-none opacity-60">
+    <div className="relative min-h-screen overflow-x-hidden bg-black">
+      {/* ULTRA PREMIUM BACKGROUND */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* CINEMATIC SHADER */}
         <ColorBends
-          className="w-full h-full no-transition"
-          colors={theme === 'dark' ? ['#4338ca', '#9d174d'] : ['#a5b4fc', '#f9a8d4']}
-          speed={0.05}
-          scale={1.2}
-          frequency={1.3}
-          warpStrength={1}
-          mouseInfluence={0.2}
-          noise={0.1}
-          parallax={0.5}
-          iterations={1}
-          intensity={1.2}
-          bandWidth={6}
-          transparent
-          autoRotate={1}
+          className="absolute inset-0"
+          colors={[
+            '#ffffff',
+            '#71717a',
+            '#000000',
+          ]}
         />
+
+        {/* HERO GLOW */}
+        <div
+          ref={heroGlowRef}
+          className="
+            absolute
+            top-[-20%]
+            left-1/2
+            -translate-x-1/2
+            w-[1200px]
+            h-[1200px]
+            rounded-full
+            bg-white/[0.035]
+            blur-[220px]
+            opacity-50
+          "
+        />
+
+        {/* AMBIENT LIGHT 1 */}
+        <div
+          ref={ambientOneRef}
+          className="
+            absolute
+            top-[5%]
+            left-[-10%]
+            w-[700px]
+            h-[700px]
+            rounded-full
+            bg-zinc-300/[0.04]
+            blur-[180px]
+          "
+        />
+
+        {/* AMBIENT LIGHT 2 */}
+        <div
+          ref={ambientTwoRef}
+          className="
+            absolute
+            bottom-[-10%]
+            right-[-5%]
+            w-[650px]
+            h-[650px]
+            rounded-full
+            bg-zinc-400/[0.03]
+            blur-[180px]
+          "
+        />
+
+        {/* PREMIUM GRID */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at center, rgba(255,255,255,0.45) 1px, transparent 1px)',
+
+            backgroundSize: '4px 4px',
+          }}
+        />
+
+        {/* CINEMATIC VIGNETTE */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_38%,rgba(0,0,0,0.78)_100%)]" />
+
+        {/* TOP FADE */}
+        <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-b from-black via-black/85 to-transparent" />
+
+        {/* BOTTOM FADE */}
+        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-black/95 to-transparent" />
       </div>
 
-      {/* Main content */}
+      {/* MAIN CONTENT */}
       <div className="relative z-10 flex flex-col">
-
-        {/* ── Hero ── */}
-        <div ref={heroRef} className="relative min-h-screen flex flex-col">
-          {/* Nav card colors read from CSS variables at render time */}
+        {/* HERO */}
+        <div className="relative min-h-screen flex flex-col">
+          {/* NAVBAR */}
           <CardNav
             items={[
               {
                 label: 'Product',
-                bgColor: 'var(--color-nav-card-product)',
-                textColor: 'var(--color-nav-card-product-text)',
+
+                bgColor:
+                  'var(--color-nav-card-product)',
+
+                textColor:
+                  'var(--color-nav-card-product-text)',
+
                 links: [
-                  { label: 'How it works', href: '#how-it-works', ariaLabel: 'How it works' },
-                  { label: 'Features', href: '#features', ariaLabel: 'Features' },
-                  { label: 'Examples', href: '#examples', ariaLabel: 'Examples' }
-                ]
+                  {
+                    label: 'How it works',
+                    href: '#how-it-works',
+                    ariaLabel:
+                      'How it works',
+                  },
+
+                  {
+                    label: 'Features',
+                    href: '#features',
+                    ariaLabel: 'Features',
+                  },
+
+                  {
+                    label: 'Examples',
+                    href: '#examples',
+                    ariaLabel: 'Examples',
+                  },
+                ],
               },
+
               {
                 label: 'Resources',
-                bgColor: 'var(--color-nav-card-resources)',
-                textColor: 'var(--color-nav-card-resources-text)',
+
+                bgColor:
+                  'var(--color-nav-card-resources)',
+
+                textColor:
+                  'var(--color-nav-card-resources-text)',
+
                 links: [
-                  { label: 'Wall of Love', href: '#testimonials', ariaLabel: 'Testimonials' },
-                  { label: 'Pricing', href: '#pricing', ariaLabel: 'Pricing' },
-                  { label: 'FAQ', href: '#faq', ariaLabel: 'FAQ' }
-                ]
+                  {
+                    label: 'Wall of Love',
+                    href: '#testimonials',
+                    ariaLabel:
+                      'Testimonials',
+                  },
+
+                  {
+                    label: 'Pricing',
+                    href: '#pricing',
+                    ariaLabel: 'Pricing',
+                  },
+
+                  {
+                    label: 'FAQ',
+                    href: '#faq',
+                    ariaLabel: 'FAQ',
+                  },
+                ],
               },
+
               {
                 label: 'Company',
-                bgColor: 'var(--color-nav-card-company)',
-                textColor: 'var(--color-nav-card-company-text)',
+
+                bgColor:
+                  'var(--color-nav-card-company)',
+
+                textColor:
+                  'var(--color-nav-card-company-text)',
+
                 links: [
-                  { label: 'Log In', href: '/login', ariaLabel: 'Log in' },
-                  { label: 'Sign Up', href: '/signup', ariaLabel: 'Sign up' },
-                  { label: 'Contact', href: '#contact', ariaLabel: 'Contact us' }
-                ]
-              }
+                  {
+                    label: 'About Us',
+                    href: '/about',
+                    ariaLabel: 'About us',
+                  },
+
+                  {
+                    label: 'Log In',
+                    href: '/login',
+                    ariaLabel: 'Log in',
+                  },
+
+                  {
+                    label: 'Contact',
+                    href: '#contact',
+                    ariaLabel:
+                      'Contact us',
+                  },
+                ],
+              },
             ]}
           />
+
+          {/* HERO CONTENT */}
           <HeroContent />
         </div>
 
-        {/* ── Interactive Sandbox ── */}
+        {/* CONTENT */}
         <InteractiveSandbox />
 
-        {/* ── How It Works ── */}
         <HowItWorks />
 
-        {/* ── Features ── */}
         <Features />
 
-        {/* ── Examples ── */}
         <Examples />
 
-        {/* ── Contact ── */}
         <ContactSection />
 
-        {/* ── Testimonials ── */}
         <Testimonials />
 
-        {/* ── Pricing ── */}
         <Pricing />
 
-        {/* ── FAQ ── */}
         <FAQ />
 
-        {/* ── CTA ── */}
         <CTASection />
 
-        {/* ── Footer ── */}
         <Footer />
-
       </div>
     </div>
   );

@@ -1,5 +1,15 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
-import { HelpCircle, ChevronDown, Sparkles } from 'lucide-react';
+import {
+  ChevronDown,
+  Sparkles,
+} from 'lucide-react';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const faqCategories = [
   {
@@ -8,204 +18,375 @@ const faqCategories = [
     items: [
       {
         q: 'Does it actually sound like me, or does it sound like AI?',
-        a: 'CreatorOS trains a voice profile from your own writing samples and runs every output through a brand consistency check. If the tone drifts, it automatically revises before showing you. Most users\' audiences can\'t tell the difference — we\'ve had creators run for weeks without mentioning it.',
+        a: 'CreatorOS trains a voice profile from your own writing samples and runs every output through advanced brand consistency refinement systems. Most audiences genuinely cannot tell the difference.',
       },
+
       {
-        q: 'How does the brand voice training actually work?',
-        a: 'You paste 3–10 examples of your best existing content. Our AI extracts your sentence rhythm, vocabulary, humor patterns, and CTA style into a personal voice model. Every output is scored against this profile and only surfaced to you if it passes.',
+        q: 'How does the brand voice training work?',
+        a: 'You upload examples of your content and CreatorOS extracts vocabulary, cadence, sentence rhythm, CTA behavior, and stylistic patterns into a personalized voice model.',
       },
-    ]
+    ],
   },
+
   {
     id: 'features',
-    label: 'Features & Capabilities',
+    label: 'Features',
     items: [
       {
         q: 'Which platforms does the autopilot support?',
-        a: 'Instagram (Reels + Feed), LinkedIn, X/Twitter, YouTube (Community posts + Shorts metadata), Pinterest, and Facebook Pages. TikTok autopublish is in beta — you can schedule the content and get a one-tap post reminder instead.',
+        a: 'Instagram, LinkedIn, X/Twitter, YouTube, Facebook Pages, Pinterest, and TikTok scheduling workflows.',
       },
+
       {
-        q: 'What video formats and lengths do you support?',
-        a: 'MP4, MOV, and MP3 up to 4 hours. YouTube URLs of any length. Loom recordings. Podcast RSS feeds (auto-ingested daily). The longer the video, the more outputs and viral moment clips we can extract.',
+        q: 'Can I edit outputs before publishing?',
+        a: 'Yes. Every output can be edited, regenerated, refined, or rejected before going live.',
       },
+
       {
-        q: 'Can I edit the outputs before they go out?',
-        a: 'Yes, always. Every output has an inline editor. You can edit, regenerate with new instructions, or reject it entirely. The autopilot only publishes outputs you\'ve approved — you\'re always in control of what goes live.',
+        q: 'What video formats are supported?',
+        a: 'MP4, MOV, MP3, YouTube URLs, podcasts, Loom recordings, and long-form uploads up to 4 hours.',
       },
-    ]
+    ],
   },
+
   {
     id: 'privacy',
-    label: 'Privacy & Data',
+    label: 'Privacy',
     items: [
       {
-        q: 'Is my content stored or used to train AI models?',
-        a: 'Your raw video files are stored temporarily (90-day TTL on secure storage) and are never used to train any model. Your brand voice data and generated content are stored privately and never shared. You can delete all your data from Settings at any time.',
+        q: 'Is my data used to train AI models?',
+        a: 'No. Your uploads, voice profile, and generated outputs remain private and are never used for public model training.',
       },
-    ]
+
+      {
+        q: 'How secure is CreatorOS?',
+        a: 'CreatorOS uses encrypted storage systems, secure cloud processing, and isolated workspace environments for every organization.',
+      },
+    ],
   },
+
   {
     id: 'billing',
-    label: 'Pricing & Billing',
+    label: 'Billing',
     items: [
       {
-        q: 'What happens if I go over my plan limits?',
-        a: 'On the Free plan, additional runs are paused until the next billing cycle or you upgrade. We never auto-charge overages. On Pro, runs are unlimited. You\'ll always see your usage in the dashboard.',
+        q: 'What happens if I exceed my plan limits?',
+        a: 'Free plans pause additional runs until renewal or upgrade. Pro plans include unlimited workflow executions.',
       },
-    ]
-  }
+
+      {
+        q: 'Can I cancel anytime?',
+        a: 'Yes. You can cancel, pause, or upgrade your subscription at any time directly from your dashboard.',
+      },
+    ],
+  },
 ];
 
 export default function FAQ() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(faqCategories[0].id);
-  const [openIdx, setOpenIdx] = useState<number | null>(0); // First item open by default
+  const sectionRef =
+    useRef<HTMLElement>(null);
 
-  // Entrance animation observer
+  const headingRef =
+    useRef<HTMLDivElement>(null);
+
+  const itemsRef =
+    useRef<HTMLDivElement>(null);
+
+  const [activeCategory, setActiveCategory] =
+    useState(faqCategories[0].id);
+
+  const [openIdx, setOpenIdx] =
+    useState<number | null>(0);
+
+  const activeData =
+    faqCategories.find(
+      (c) => c.id === activeCategory
+    )?.items || [];
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+    const ctx = gsap.context(() => {
+      /*
+        HEADER ANIMATION
+      */
+      gsap.fromTo(
+        headingRef.current?.children ?? [],
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 88%',
+          },
         }
-      },
-      { threshold: 0.1 }
-    );
+      );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+      /*
+        FAQ ITEMS REVEAL
+      */
+      gsap.fromTo(
+        '.faq-item',
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: itemsRef.current,
+            start: 'top 88%',
+          },
+        }
+      );
+    }, sectionRef);
 
-  // Reset open index when category changes
-  const handleCategoryChange = (id: string) => {
-    setActiveCategory(id);
-    setOpenIdx(0);
-  };
-
-  const activeData = faqCategories.find(c => c.id === activeCategory)?.items || [];
+    return () => ctx.revert();
+  }, [activeCategory]);
 
   return (
     <section
       ref={sectionRef}
       id="faq"
-      className="py-24 sm:py-32 bg-[#030303] text-white relative overflow-hidden z-20 font-sans selection:bg-white selection:text-black"
+      className="relative overflow-hidden bg-black py-32 md:py-40 text-white"
     >
+      {/* PREMIUM BACKGROUND */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-      {/* Premium Ambient Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-500/[0.03] blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
+        {/* AMBIENT LIGHTING */}
+        <div className="absolute top-[-15%] left-[10%] w-[800px] h-[800px] rounded-full bg-white/[0.035] blur-[180px]" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="absolute bottom-[-20%] right-[5%] w-[700px] h-[700px] rounded-full bg-white/[0.025] blur-[180px]" />
 
-        {/* Section Header (Outside the card) */}
-        <div className="text-center mb-16">
-          <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] text-xs font-medium tracking-wide text-neutral-400 mb-6 backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-neutral-300" />
-              <span>Support & Knowledge</span>
+        {/* RADIAL LIGHT */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+
+        {/* PREMIUM DOT GRID */}
+        <div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)',
+
+            backgroundSize: '4px 4px',
+
+            maskImage:
+              'radial-gradient(circle at center top, black 18%, transparent 82%)',
+
+            WebkitMaskImage:
+              'radial-gradient(circle at center top, black 18%, transparent 82%)',
+          }}
+        />
+
+        {/* VIGNETTE */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.5)_100%)]" />
+
+        {/* TOP FADE */}
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black via-black/70 to-transparent" />
+
+        {/* BOTTOM FADE */}
+        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-black via-black/80 to-transparent" />
+      </div>
+
+      {/* MAIN */}
+      <div className="relative z-10 max-w-[1500px] mx-auto px-6 sm:px-8 lg:px-16">
+
+        {/* HEADER */}
+        <div
+          ref={headingRef}
+          className="mb-24 md:mb-32"
+        >
+
+          {/* LABEL */}
+          <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-2xl px-5 py-2 mb-10 shadow-[0_0_60px_rgba(255,255,255,0.03)]">
+
+            <Sparkles className="w-3.5 h-3.5 text-white/70" />
+
+            <span className="text-[10px] uppercase tracking-[0.34em] text-white/38">
+              Support & Knowledge
+            </span>
+          </div>
+
+          {/* GRID */}
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-16 lg:gap-24 items-end">
+
+            {/* LEFT */}
+            <div className="max-w-4xl">
+
+              <h2 className="text-[42px] sm:text-[64px] lg:text-[92px] leading-[0.9] tracking-[-0.08em] font-semibold">
+
+                Frequently
+                <span className="block text-white/18">
+                  asked questions.
+                </span>
+              </h2>
+            </div>
+
+            {/* RIGHT */}
+            <div>
+
+              <p className="max-w-xl text-[15px] md:text-[17px] leading-[2] text-white/42">
+                Everything you need to know
+                about CreatorOS, publishing
+                systems, automation workflows,
+                brand voice intelligence,
+                privacy, and scaling modern
+                creator operations.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Main Glassmorphic Card (Matches Reference Image Structure) */}
-        <div
-          className={`relative rounded-[2rem] border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl shadow-2xl transition-all duration-1000 delay-150 ease-out overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-        >
-          {/* Inner ambient glow */}
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+        {/* CONTENT */}
+        <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-28">
 
-          {/* Card Header */}
-          <div className="px-8 sm:px-12 py-10 border-b border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-neutral-400 text-sm sm:text-base font-light">
-                Everything you need to know about the platform, billing, and how it works.
-              </p>
-            </div>
+          {/* SIDEBAR */}
+          <div className="flex lg:flex-col gap-3 overflow-x-auto scrollbar-hide pb-2 lg:pb-0">
 
-            {/* Reference image '?' Circle */}
-            <div className="hidden sm:flex shrink-0 w-16 h-16 rounded-full bg-white/[0.05] border border-white/10 items-center justify-center shadow-inner">
-              <HelpCircle className="w-7 h-7 text-neutral-300" />
-            </div>
+            {faqCategories.map((category) => {
+              const active =
+                activeCategory ===
+                category.id;
+
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => {
+                    setActiveCategory(
+                      category.id
+                    );
+
+                    setOpenIdx(0);
+                  }}
+                  className={`group relative shrink-0 overflow-hidden rounded-2xl border px-5 py-4 text-left transition-all duration-500
+                  ${active
+                      ? 'border-white/20 bg-white text-black shadow-[0_0_80px_rgba(255,255,255,0.08)]'
+                      : 'border-white/10 bg-white/[0.02] text-white/40 hover:text-white hover:bg-white/[0.04]'
+                    }
+                  `}
+                >
+
+                  {/* ACTIVE LIGHT */}
+                  {active && (
+                    <div className="absolute inset-0 bg-gradient-to-b from-white to-white/90" />
+                  )}
+
+                  <span className="relative z-10 text-[13px] font-medium tracking-[-0.02em] whitespace-nowrap">
+                    {category.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Card Body - Split Layout */}
-          <div className="flex flex-col lg:flex-row relative z-10">
+          {/* FAQ ITEMS */}
+          <div
+            ref={itemsRef}
+            className="flex flex-col"
+          >
+            {activeData.map((faq, idx) => {
+              const isOpen =
+                openIdx === idx;
 
-            {/* Left Column: Categories */}
-            <div className="w-full lg:w-1/3 p-8 sm:p-12 lg:border-r border-b lg:border-b-0 border-white/[0.08] bg-white/[0.01]">
-              <div className="flex flex-col gap-2">
-                {faqCategories.map((category) => (
+              return (
+                <div
+                  key={idx}
+                  className="faq-item group border-b border-white/[0.08]"
+                >
+
+                  {/* BUTTON */}
                   <button
-                    key={category.id}
-                    onClick={() => handleCategoryChange(category.id)}
-                    className={`text-left px-5 py-4 rounded-xl font-medium transition-all duration-300 ${activeCategory === category.id
-                        ? 'bg-white text-black shadow-lg scale-100' // Dark mode translation of the black active block
-                        : 'bg-transparent text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-200'
-                      }`}
+                    onClick={() =>
+                      setOpenIdx(
+                        isOpen
+                          ? null
+                          : idx
+                      )
+                    }
+                    className="w-full flex items-start justify-between gap-8 py-8 md:py-10 text-left"
                   >
-                    {category.label}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* Right Column: Accordion Questions */}
-            <div className="w-full lg:w-2/3 p-8 sm:p-12">
-              <div className="flex flex-col">
-                {activeData.map((faq, idx) => {
-                  const isOpen = openIdx === idx;
-                  return (
+                    {/* QUESTION */}
+                    <div className="max-w-4xl">
+
+                      <span
+                        className={`block text-[22px] md:text-[30px] leading-[1.28] tracking-[-0.05em] transition-all duration-500
+                        ${isOpen
+                            ? 'text-white'
+                            : 'text-white/70 group-hover:text-white'
+                          }
+                        `}
+                      >
+                        {faq.q}
+                      </span>
+                    </div>
+
+                    {/* ICON */}
                     <div
-                      key={idx}
-                      className={`group border-b border-white/[0.08] last:border-0 ${idx === 0 ? 'pt-0' : 'pt-2'}`}
+                      className={`relative shrink-0 w-12 h-12 rounded-2xl border flex items-center justify-center transition-all duration-500
+                      ${isOpen
+                          ? 'bg-white text-black border-white shadow-[0_0_40px_rgba(255,255,255,0.08)]'
+                          : 'bg-white/[0.03] border-white/10 text-white/40 group-hover:bg-white/[0.06] group-hover:text-white'
+                        }
+                      `}
                     >
-                      <button
-                        onClick={() => setOpenIdx(isOpen ? null : idx)}
-                        className="w-full flex items-center justify-between gap-6 py-6 text-left"
-                      >
-                        <span
-                          className={`text-base sm:text-lg font-medium pr-4 transition-colors duration-300 ${isOpen ? 'text-white' : 'text-neutral-300 group-hover:text-white'
-                            }`}
-                        >
-                          {faq.q}
-                        </span>
 
-                        {/* Reference image small square icon */}
-                        <div
-                          className={`shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center transition-all duration-300 ${isOpen
-                              ? 'bg-white border-white text-black'
-                              : 'bg-white/[0.03] border-white/10 text-neutral-400 group-hover:bg-white/[0.08] group-hover:text-white'
-                            }`}
-                        >
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}`}
-                          />
-                        </div>
-                      </button>
+                      {/* INNER LIGHT */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.08] to-transparent opacity-60" />
 
-                      {/* Smooth CSS Grid Dropdown Animation */}
-                      <div
-                        className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                          }`}
-                      >
-                        <div className="overflow-hidden">
-                          <p className="pb-8 text-neutral-400 text-sm sm:text-base leading-relaxed font-light pr-12">
-                            {faq.a}
-                          </p>
-                        </div>
+                      <ChevronDown
+                        className={`relative z-10 w-4 h-4 transition-transform duration-500
+                        ${isOpen
+                            ? 'rotate-180'
+                            : ''
+                          }
+                        `}
+                      />
+                    </div>
+                  </button>
+
+                  {/* ANSWER */}
+                  <div
+                    className={`grid transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    ${isOpen
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
+                      }
+                    `}
+                  >
+                    <div className="overflow-hidden">
+
+                      <div className="pb-10 md:pb-12 max-w-3xl">
+
+                        <p className="text-[15px] md:text-[17px] leading-[2] text-white/42">
+                          {faq.a}
+                        </p>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-
+                  </div>
+                </div>
+              );
+            })}
           </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-28 md:mt-32 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.34em] text-white/14">
+
+          <div className="w-14 h-px bg-white/10" />
+
+          CreatorOS knowledge & support center
+
+          <div className="w-14 h-px bg-white/10" />
         </div>
       </div>
     </section>

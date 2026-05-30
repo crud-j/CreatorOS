@@ -25,7 +25,7 @@ export default function CTASection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setSubmitted(true);

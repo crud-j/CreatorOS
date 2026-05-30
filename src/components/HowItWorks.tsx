@@ -10,113 +10,102 @@ const steps = [
     num: '01',
     title: 'Upload your content',
     desc:
-      'Paste a YouTube link, upload a podcast, or drop in raw media files. CreatorOS automatically structures and prepares every format for distribution.',
-    footer: 'YouTube · Podcasts · MP4 · Audio',
-    glow: 'from-orange-500/20 to-transparent',
+      'Paste a YouTube URL, upload a podcast, MP4, or Loom recording. CreatorOS automatically ingests and processes long-form media.',
+    footer: 'YouTube · MP4 · Podcast · Loom',
   },
+
   {
     num: '02',
-    title: 'Train your voice',
+    title: 'AI detects viral moments',
     desc:
-      'The AI learns your tone, pacing, formatting patterns, and writing style so every generated asset feels authentically yours.',
-    footer: 'Adaptive AI · One-time setup',
-    glow: 'from-amber-400/20 to-transparent',
+      'Whisper AI transcribes your content with timestamp precision while advanced scoring models identify the strongest moments automatically.',
+    footer: 'Whisper AI · Viral Intelligence',
   },
+
   {
     num: '03',
-    title: 'Generate platform-native content',
+    title: 'Generate multi-platform content',
     desc:
-      'Instantly create tweet threads, LinkedIn posts, captions, newsletters, hooks, scripts, and multi-platform content systems.',
-    footer: '30+ outputs generated instantly',
-    glow: 'from-emerald-400/20 to-transparent',
+      'AI creates platform-native posts including threads, short-form scripts, newsletters, captions, and branded social content.',
+    footer: '30+ AI Generated Assets',
   },
+
   {
     num: '04',
-    title: 'Publish & optimize automatically',
+    title: 'Publish on autopilot',
     desc:
-      'Schedule, distribute, and optimize content workflows while CreatorOS continuously improves performance using engagement data.',
-    footer: 'Automated publishing engine',
-    glow: 'from-cyan-400/20 to-transparent',
+      'Approve content, automate scheduling, and distribute across platforms while analytics continuously improve performance.',
+    footer: 'Automation · Analytics Loop',
   },
 ];
 
 export default function HowItWorks() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const sectionRef =
+    useRef<HTMLElement>(null);
+
+  const headingRef =
+    useRef<HTMLDivElement>(null);
+
+  const gridRef =
+    useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsapInstance.context(() => {
-
-      // Heading animation
+      /*
+        HEADER ANIMATION
+      */
       gsapInstance.fromTo(
-        headingRef.current?.children ?? [],
+        headingRef.current?.children ??
+        [],
         {
-          y: 40,
+          y: 30,
           opacity: 0,
         },
         {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.08,
+          ease: 'power3.out',
+
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 82%',
             once: true,
           },
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.12,
-          ease: 'power3.out',
         }
       );
 
-      // Cards animation
+      /*
+        CARD ANIMATION
+      */
       if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll('.step-card');
+        const cards =
+          gridRef.current.querySelectorAll(
+            '.step-card'
+          );
 
         gsapInstance.fromTo(
           cards,
           {
-            y: 60,
+            y: 40,
             opacity: 0,
-            scale: 0.96,
           },
           {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.08,
+            ease: 'power3.out',
+
             scrollTrigger: {
               trigger: gridRef.current,
               start: 'top 85%',
               once: true,
             },
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            stagger: 0.12,
-            ease: 'power3.out',
           }
         );
       }
-
-      // Ambient floating gradients
-      gsapInstance.to('.ambient-gradient-left', {
-        y: -120,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          scrub: 1,
-          start: 'top bottom',
-          end: 'bottom top',
-        },
-      });
-
-      gsapInstance.to('.ambient-gradient-right', {
-        y: 120,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          scrub: 1,
-          start: 'top bottom',
-          end: 'bottom top',
-        },
-      });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -126,99 +115,257 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="relative overflow-hidden bg-black py-32 lg:py-40 text-white"
+      className="
+        relative
+        overflow-hidden
+        py-32
+        lg:py-40
+        text-white
+      "
     >
-
-      {/* Ambient Background Gradients */}
-      <div className="ambient-gradient-left absolute -top-40 left-[-10%] w-[500px] h-[500px] rounded-full bg-orange-500/10 blur-[140px] pointer-events-none" />
-
-      <div className="ambient-gradient-right absolute bottom-[-200px] right-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/10 blur-[140px] pointer-events-none" />
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_45%)] pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-
-        {/* Header */}
+      <div
+        className="
+          relative
+          z-10
+          max-w-[1450px]
+          mx-auto
+          px-6
+          md:px-8
+        "
+      >
+        {/* HEADER */}
         <div
           ref={headingRef}
-          className="max-w-4xl mx-auto text-center mb-28"
+          className="
+            max-w-5xl
+            mx-auto
+            text-center
+            mb-28
+          "
         >
+          {/* LABEL */}
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-3
+              rounded-full
+              border
+              border-white/[0.08]
+              bg-white/[0.015]
+              px-5
+              py-2.5
+              backdrop-blur-md
+              mb-8
+            "
+          >
+            <div
+              className="
+                w-2
+                h-2
+                rounded-full
+                bg-white/60
+              "
+            />
 
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 backdrop-blur-xl mb-8">
-            <div className="w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_12px_rgba(251,146,60,0.8)]" />
-
-            <span className="text-[11px] uppercase tracking-[0.3em] text-white/50 font-medium">
-              How It Works
+            <span
+              className="
+                text-[11px]
+                uppercase
+                tracking-[0.28em]
+                text-white/42
+                font-medium
+              "
+            >
+              Workflow Process
             </span>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-5xl md:text-7xl lg:text-[82px] font-semibold tracking-[-0.06em] leading-[0.92]">
-            Turn one piece of content
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/30">
-              into an entire content engine.
+          {/* TITLE */}
+          <h2
+            className="
+              text-[48px]
+              md:text-[68px]
+              xl:text-[88px]
+              leading-[0.9]
+              tracking-[-0.08em]
+              font-semibold
+            "
+          >
+            One upload.
+            <span className="block text-white/38">
+              Infinite distribution.
             </span>
           </h2>
 
-          {/* Description */}
-          <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed text-white/50">
-            CreatorOS transforms long-form content into premium,
-            platform-native distribution systems — optimized for every
-            channel automatically.
+          {/* DESCRIPTION */}
+          <p
+            className="
+              mt-8
+              max-w-3xl
+              mx-auto
+              text-[17px]
+              md:text-[19px]
+              leading-[1.9]
+              text-white/50
+            "
+          >
+            CreatorOS transforms a single
+            long-form video into a fully
+            automated content engine —
+            generating platform-native assets,
+            optimizing engagement, and
+            distributing content autonomously.
           </p>
         </div>
 
-        {/* Steps Grid */}
+        {/* GRID */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+          className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            xl:grid-cols-4
+            gap-5
+            xl:gap-6
+          "
         >
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="step-card group relative rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:-translate-y-1"
+              className="
+                step-card
+                group
+                relative
+                overflow-hidden
+                rounded-[30px]
+                border
+                border-white/[0.07]
+                bg-white/[0.015]
+                backdrop-blur-md
+                transition-all
+                duration-500
+                hover:bg-white/[0.03]
+                hover:border-white/[0.12]
+                hover:-translate-y-[3px]
+              "
             >
-
-              {/* Gradient Hover Glow */}
+              {/* TOP LIGHT */}
               <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br ${step.glow}`}
+                className="
+                  absolute
+                  inset-x-0
+                  top-0
+                  h-32
+                  bg-gradient-to-b
+                  from-white/[0.025]
+                  to-transparent
+                  pointer-events-none
+                "
               />
 
-              {/* Inner Top Light */}
-              <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/[0.04] to-transparent opacity-60" />
-
-              {/* Large Number */}
-              <div className="absolute top-6 right-6 text-[90px] font-semibold tracking-[-0.08em] text-white/[0.04] select-none leading-none">
+              {/* BACKGROUND NUMBER */}
+              <div
+                className="
+                  absolute
+                  top-6
+                  right-6
+                  text-[72px]
+                  font-semibold
+                  tracking-[-0.08em]
+                  text-white/[0.03]
+                  select-none
+                "
+              >
                 {step.num}
               </div>
 
-              {/* Content */}
-              <div className="relative z-10 flex flex-col h-full p-8 lg:p-10">
+              {/* CONTENT */}
+              <div
+                className="
+                  relative
+                  z-10
+                  flex
+                  flex-col
+                  h-full
+                  p-7
+                "
+              >
+                {/* TOP ACCENT */}
+                <div
+                  className="
+                    h-[2px]
+                    w-14
+                    rounded-full
+                    bg-gradient-to-r
+                    from-white/70
+                    to-transparent
+                    mb-10
+                    transition-all
+                    duration-500
+                    group-hover:w-20
+                  "
+                />
 
-                {/* Top Line */}
-                <div className="w-12 h-px bg-gradient-to-r from-white/60 to-transparent mb-10 transition-all duration-500 group-hover:w-20" />
+                {/* STEP */}
+                <span
+                  className="
+                    text-[11px]
+                    uppercase
+                    tracking-[0.28em]
+                    text-white/35
+                    font-medium
+                  "
+                >
+                  Step {step.num}
+                </span>
 
-                {/* Step */}
-                <div className="mb-8">
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/35 font-medium">
-                    Step {step.num}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl font-medium tracking-tight leading-tight text-white mb-5 max-w-[260px]">
+                {/* TITLE */}
+                <h3
+                  className="
+                    mt-6
+                    text-[28px]
+                    leading-[1.08]
+                    tracking-[-0.05em]
+                    font-semibold
+                    text-white
+                    max-w-[240px]
+                  "
+                >
                   {step.title}
                 </h3>
 
-                {/* Description */}
-                <p className="text-sm leading-7 text-white/50 flex-grow">
+                {/* DESC */}
+                <p
+                  className="
+                    mt-6
+                    text-[15px]
+                    leading-[1.9]
+                    text-white/50
+                    flex-grow
+                  "
+                >
                   {step.desc}
                 </p>
 
-                {/* Divider */}
-                <div className="mt-12 pt-6 border-t border-white/10">
-                  <span className="text-[11px] uppercase tracking-[0.22em] text-white/30">
+                {/* FOOTER */}
+                <div
+                  className="
+                    mt-12
+                    pt-6
+                    border-t
+                    border-white/[0.08]
+                  "
+                >
+                  <span
+                    className="
+                      text-[10px]
+                      uppercase
+                      tracking-[0.24em]
+                      text-white/28
+                    "
+                  >
                     {step.footer}
                   </span>
                 </div>
@@ -227,14 +374,24 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Bottom Statement */}
+        {/* BOTTOM TEXT */}
         <div className="mt-28 text-center">
-          <div className="inline-flex items-center gap-3 text-white/25 text-xs uppercase tracking-[0.35em]">
-            <div className="w-12 h-px bg-white/10" />
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-4
+              text-[11px]
+              uppercase
+              tracking-[0.32em]
+              text-white/24
+            "
+          >
+            <div className="w-14 h-px bg-white/[0.08]" />
 
-            Built for modern creators & media teams
+            AI-Powered Content Distribution
 
-            <div className="w-12 h-px bg-white/10" />
+            <div className="w-14 h-px bg-white/[0.08]" />
           </div>
         </div>
       </div>
