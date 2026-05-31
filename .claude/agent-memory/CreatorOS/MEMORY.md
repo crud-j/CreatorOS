@@ -1,0 +1,1 @@
+- [Project Stack](project-stack.md) — Vite+React frontend + Express backend in one repo, two tsconfigs, Stripe CLI at stripe-cli/stripe.exe

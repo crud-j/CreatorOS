@@ -69,7 +69,7 @@ export default function Examples() {
         <div className="absolute top-[-15%] right-[4%] w-[760px] h-[760px] rounded-full bg-white/[0.03] blur-[180px]" />
         <div className="absolute bottom-[-20%] left-[6%] w-[680px] h-[680px] rounded-full bg-white/[0.02] blur-[190px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_55%)]" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay" />
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black via-black/80 to-transparent" />
       </div>

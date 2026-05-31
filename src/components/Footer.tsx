@@ -48,7 +48,7 @@ export default function Footer() {
         />
 
         {/* Fine grain overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-14 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-14 mix-blend-overlay" />
 
         {/* Vignette and fades */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_48%,rgba(0,0,0,0.78)_100%)]" />

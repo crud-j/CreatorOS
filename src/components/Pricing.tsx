@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import gsapActual from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiCheck } from 'react-icons/fi';
+import { redirectToCheckout } from '../lib/stripe';
+import { supabase } from '@backend/AuthFunctionality/supabaseClient';
 
 const gsapInstance = gsapActual;
 gsapInstance.registerPlugin(ScrollTrigger);
@@ -58,6 +60,39 @@ export default function Pricing() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const [annual, setAnnual] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
+  const [checkoutError,   setCheckoutError]   = useState<string | null>(null);
+
+  async function handleCheckout(tier: 'pro' | 'agency' | 'free') {
+    if (tier === 'free') {
+      window.location.href = '/signup';
+      return;
+    }
+
+    setCheckoutLoading(tier);
+    setCheckoutError(null);
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        window.location.href = '/login?redirect=pricing';
+        return;
+      }
+
+      await redirectToCheckout({
+        tier,
+        billingCycle: annual ? 'annual' : 'monthly',
+        userId:    session.user.id,
+        userEmail: session.user.email ?? '',
+      });
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setCheckoutError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setCheckoutLoading(null);
+    }
+  }
 
   useEffect(() => {
     const ctx = gsapInstance.context(() => {
@@ -250,8 +285,12 @@ export default function Pricing() {
                     </p>
                   </div>
 
-                  <button className="mt-7 h-[48px] rounded-[12px] border border-white/10 bg-white/[0.03] text-[13px] font-medium text-white/70 transition-all duration-300 hover:bg-white/[0.06] hover:text-white">
-                    {plan.cta}
+                  <button
+                    className="mt-7 h-[48px] rounded-[12px] border border-white/10 bg-white/[0.03] text-[13px] font-medium text-white/70 transition-all duration-300 hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => handleCheckout(plan.tier.toLowerCase() as 'pro' | 'agency' | 'free')}
+                    disabled={checkoutLoading === plan.tier.toLowerCase()}
+                  >
+                    {checkoutLoading === plan.tier.toLowerCase() ? 'Loading...' : plan.cta}
                   </button>
 
                   <div className="my-7 flex items-center gap-4">
@@ -326,8 +365,12 @@ export default function Pricing() {
                     </p>
                   </div>
 
-                  <button className="mt-7 h-[50px] rounded-[12px] bg-white text-[13px] font-semibold text-black transition-all duration-300 hover:scale-[1.01]">
-                    {plan.cta}
+                  <button
+                    className="mt-7 h-[50px] rounded-[12px] bg-white text-[13px] font-semibold text-black transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => handleCheckout(plan.tier.toLowerCase() as 'pro' | 'agency' | 'free')}
+                    disabled={checkoutLoading === plan.tier.toLowerCase()}
+                  >
+                    {checkoutLoading === plan.tier.toLowerCase() ? 'Loading...' : plan.cta}
                   </button>
 
                   <div className="my-7 flex items-center gap-4">
@@ -363,6 +406,10 @@ export default function Pricing() {
             );
           })}
         </div>
+
+        {checkoutError && (
+          <p className="mt-6 text-center text-[13px] text-red-400">{checkoutError}</p>
+        )}
       </div>
     </section>
   );
