@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "backend": "npx tsx backend/server.ts",
     "backend:dev": "npx nodemon --watch backend --ext ts --exec \"tsx backend/server.ts\"",
-    "stripe:listen": "stripe-cli/stripe.exe listen --forward-to localhost:4000/api/stripe/webhook",
+    "stripe:listen": ".\\stripe-cli\\stripe.exe listen --forward-to localhost:4000/api/stripe/webhook",
     "dev:full": "concurrently \"npm run dev\" \"npm run backend:dev\" \"npm run stripe:listen\""
   },
   "dependencies": {
