@@ -11,7 +11,8 @@ import { gsap } from 'gsap';
 
 import { GoArrowUpRight } from 'react-icons/go';
 
-import { Sparkles, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
+import CreatorOSLogo from '../assets/CREATOROSTEXTLOGO.svg';
 
 type CardNavLink = {
   label: string;
@@ -247,9 +248,9 @@ const CardNav: React.FC<CardNavProps> = ({
         fixed
         left-1/2
         top-4
-        z-[140]
+        z-140
         w-[94%]
-        max-w-[1180px]
+        max-w-295
         -translate-x-1/2
         transition-all
         duration-500
@@ -263,7 +264,7 @@ const CardNav: React.FC<CardNavProps> = ({
           overflow-hidden
           rounded-[26px]
           border
-          border-white/[0.08]
+          border-white/8
           shadow-[0_12px_60px_rgba(0,0,0,0.42)]
           backdrop-blur-2xl
         "
@@ -272,19 +273,19 @@ const CardNav: React.FC<CardNavProps> = ({
         }}
       >
         {/* EDGE LIGHT */}
-        <div className="pointer-events-none absolute inset-0 rounded-[26px] bg-gradient-to-b from-white/[0.08] via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 rounded-[26px] bg-linear-to-b from-white/8 via-transparent to-transparent" />
 
         {/* BG */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-[10%] top-[-40%] h-[220px] w-[220px] rounded-full bg-white/[0.04] blur-[90px]" />
+          <div className="absolute left-[10%] top-[-40%] h-55 w-55 rounded-full bg-white/4 blur-[90px]" />
 
-          <div className="absolute bottom-[-40%] right-[5%] h-[220px] w-[220px] rounded-full bg-white/[0.03] blur-[90px]" />
+          <div className="absolute bottom-[-40%] right-[5%] h-55 w-55 rounded-full bg-white/3 blur-[90px]" />
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_55%)]" />
         </div>
 
         {/* TOP BAR */}
-        <div className="relative z-20 flex h-[74px] items-center justify-between px-4 md:px-6">
+        <div className="relative z-20 flex h-18.5 items-center justify-between px-4 md:px-6">
           {/* LEFT */}
           <div className="flex items-center gap-3">
             {/* MENU */}
@@ -300,25 +301,24 @@ const CardNav: React.FC<CardNavProps> = ({
               className="
                 relative
                 flex
-                h-[44px]
-                w-[44px]
+                h-11
+                w-11
                 items-center
                 justify-center
-                rounded-[16px]
+                rounded-2xl
                 border
-                border-white/[0.08]
-                bg-white/[0.03]
+                border-white/8
+                bg-white/3
                 transition-all
                 duration-300
-                hover:bg-white/[0.05]
-              "
+                hover:bg-white/5"
             >
               <div className="relative h-4 w-4">
                 <span
                   className={`
                     absolute
                     left-0
-                    top-[4px]
+                    top-1
                     h-px
                     w-4
                     rounded-full
@@ -327,7 +327,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     duration-300
                     ${
                       isHamburgerOpen
-                        ? 'top-[7px] rotate-45'
+                        ? 'top-1.75 rotate-45'
                         : ''
                     }
                   `}
@@ -336,7 +336,7 @@ const CardNav: React.FC<CardNavProps> = ({
                 <span
                   className={`
                     absolute
-                    bottom-[4px]
+                    bottom-1
                     left-0
                     h-px
                     w-4
@@ -346,7 +346,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     duration-300
                     ${
                       isHamburgerOpen
-                        ? 'bottom-[7px] -rotate-45'
+                        ? 'bottom-1.75 -rotate-45'
                         : ''
                     }
                   `}
@@ -355,34 +355,13 @@ const CardNav: React.FC<CardNavProps> = ({
             </button>
 
             {/* LOGO */}
-            <div className="flex items-center gap-3">
-              <div
-                className="
-                  relative
-                  flex
-                  h-[44px]
-                  w-[44px]
-                  items-center
-                  justify-center
-                  rounded-[16px]
-                  border
-                  border-white/[0.08]
-                  bg-white/[0.03]
-                "
-              >
-                <div className="absolute inset-0 rounded-[16px] bg-gradient-to-b from-white/[0.08] to-transparent" />
-
-                <Sparkles className="relative z-10 h-[15px] w-[15px] text-white" />
-              </div>
-
-              <div className="hidden sm:flex flex-col leading-none">
-                <span className="text-[15px] font-semibold tracking-[-0.05em] text-white">
-                  CreatorOS
-                </span>
-
-                <span className="mt-1 text-[9px] uppercase tracking-[0.24em] text-white/28">
-                  Creative infrastructure
-                </span>
+            <div className="flex items-center">
+              <div className="flex h-11 items-center gap-3 rounded-xl border border-white/10 bg-white/2 px-3">
+                <img
+                  src={CreatorOSLogo}
+                  alt="CreatorOS"
+                  className="h-4 w-auto object-contain"
+                />
               </div>
             </div>
           </div>
@@ -416,11 +395,11 @@ const CardNav: React.FC<CardNavProps> = ({
               className="
                 relative
                 hidden
-                h-[44px]
+                h-11
                 items-center
                 gap-2
                 overflow-hidden
-                rounded-[16px]
+                rounded-2xl
                 border
                 border-white/10
                 bg-white
@@ -435,7 +414,7 @@ const CardNav: React.FC<CardNavProps> = ({
                 md:inline-flex
               "
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-white to-white/90" />
+              <div className="absolute inset-0 bg-linear-to-b from-white to-white/90" />
 
               <span className="relative z-10">
                 Start free
@@ -455,7 +434,7 @@ const CardNav: React.FC<CardNavProps> = ({
             absolute
             left-0
             right-0
-            top-[74px]
+            top-18.5
             p-4
             md:p-5
             transition-all
@@ -478,32 +457,31 @@ const CardNav: React.FC<CardNavProps> = ({
                     group
                     relative
                     flex
-                    min-h-[190px]
+                    min-h-47.5
                     flex-col
                     overflow-hidden
-                    rounded-[24px]
+                    rounded-3xl
                     border
-                    border-white/[0.08]
-                    bg-white/[0.025]
+                    border-white/8
+                    bg-white/2.5
                     p-6
                     backdrop-blur-xl
                     transition-all
                     duration-500
-                    hover:border-white/[0.12]
-                    hover:bg-white/[0.04]
-                  "
+                    hover:border-white/12
+                    hover:bg-white/4"
                 >
                   {/* LIGHT */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] to-transparent opacity-70" />
+                  <div className="absolute inset-0 bg-linear-to-b from-white/4 to-transparent opacity-70" />
 
                   {/* NUMBER */}
-                  <div className="absolute right-5 top-4 text-[48px] font-bold tracking-[-0.08em] text-white/[0.03]">
+                  <div className="absolute right-5 top-4 text-[48px] font-bold tracking-[-0.08em] text-white/3">
                     0{idx + 1}
                   </div>
 
                   <div className="relative z-10 flex h-full flex-col">
                     {/* ACCENT */}
-                    <div className="mb-5 h-px w-10 bg-gradient-to-r from-white/60 to-transparent transition-all duration-300 group-hover:w-14" />
+                    <div className="mb-5 h-px w-10 bg-linear-to-r from-white/60 to-transparent transition-all duration-300 group-hover:w-14" />
 
                     {/* TITLE */}
                     <div>
@@ -511,7 +489,7 @@ const CardNav: React.FC<CardNavProps> = ({
                         {item.label}
                       </span>
 
-                      <h3 className="mt-3 text-[24px] font-semibold tracking-[-0.05em] text-white">
+                      <h3 className="mt-3 text-[24px] font-semibold tracking-tighter text-white">
                         {item.label}
                       </h3>
                     </div>
@@ -542,7 +520,7 @@ const CardNav: React.FC<CardNavProps> = ({
                                 opacity-40
                                 transition-all
                                 duration-300
-                                group-hover/link:translate-x-[2px]
+                                group-hover/link:translate-x-0.5
                                 group-hover/link:opacity-100
                               "
                             />
