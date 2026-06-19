@@ -51,4 +51,3 @@ export function InstagramIcon({ size = 16, className, style }: IconProps) {
     </svg>
   );
 }
-th

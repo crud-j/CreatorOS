@@ -7,6 +7,15 @@ metadata:
 
 CreatorOS-1 is a single-repo project with a Vite+React frontend (`src/`) and an Express backend (`backend/`).
 
+**Frontend UI conventions (from existing pages):**
+- No Next.js, no Shadcn, no Framer Motion. Lucide React for icons only.
+- All pages wrap in `<div className="flex h-screen w-screen overflow-hidden bg-[#060606]">` with `<Sidebar />` + `<TopBar />` from `src/components/UserDashboard/`.
+- Social platform icons from `src/assets/SocialLogos/index.tsx` (YouTubeIcon, TwitterXIcon, LinkedInIcon, FacebookIcon, PinterestIcon, InstagramIcon).
+- Glass cards: `rounded-3xl border border-white/8 bg-white/[0.025] backdrop-blur-xl`.
+- Hover: `hover:bg-white/[0.045] hover:border-white/15`.
+- Input fields: `rounded-xl border border-white/8 bg-white/[0.04] text-white/80 text-[13px] px-3.5 py-2.5 placeholder:text-white/20 focus:outline-none focus:border-white/18 focus:bg-white/[0.06] transition-all w-full`.
+- Labels: `text-[10px] uppercase tracking-[0.18em] text-white/30`.
+
 **Why:** Solo builder running everything from one repository. Frontend uses Vite bundler mode; backend uses Node.js CommonJS.
 
 **Key structural facts:**
