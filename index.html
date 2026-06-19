@@ -11,6 +11,13 @@
     <title>CreatorOS — One Video. 30 Posts. Zero Effort.</title>
   </head>
   <body>
+    <!-- Prevent flash of wrong theme — runs before React mounts -->
+    <script>
+      try {
+        const t = localStorage.getItem('creatoros-theme') ?? 'dark';
+        if (t === 'dark') document.documentElement.classList.add('dark');
+      } catch (_) { document.documentElement.classList.add('dark'); }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

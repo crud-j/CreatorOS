@@ -46,7 +46,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="relative w-72.5 shrink-0 h-screen overflow-hidden">
+    <aside className="dashboard-sidebar relative w-72.5 shrink-0 h-screen overflow-hidden">
       {/* ====================================================== */}
       {/* PREMIUM BACKGROUND */}
       {/* ====================================================== */}
@@ -56,7 +56,7 @@ export default function Sidebar() {
           src={sidebarBg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="sidebar-bg-img absolute inset-0 h-full w-full object-cover object-center"
         />
 
         {/* Border */}
