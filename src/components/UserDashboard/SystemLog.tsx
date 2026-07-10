@@ -1,4 +1,5 @@
 import { RefreshCw, ShieldCheck, Bot, Send } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 const logItems = [
   {
@@ -40,12 +41,17 @@ const logItems = [
 ];
 
 export default function SystemLog() {
-  return (
-    <div className="card-noise relative rounded-3xl border border-white/8 overflow-hidden"
-      style={{ background: 'linear-gradient(200deg, #0c0c0c 0%, #080808 100%)' }}>
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
-      {/* Ambient atmosphere */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+  return (
+    <div
+      className="dash-card card-noise relative rounded-3xl border border-white/8 overflow-hidden"
+      style={{ background: isDark ? 'linear-gradient(200deg, #0c0c0c 0%, #080808 100%)' : 'var(--dash-card-bg)' }}
+    >
+
+      {/* Ambient atmosphere — dark mode only */}
+      <div className="dash-ambient absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <div className="absolute bottom-[-30%] left-[-20%] w-[240px] h-[240px] rounded-full bg-white/[0.025] blur-[90px]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_100%,rgba(255,255,255,0.04),transparent_60%)]" />
@@ -71,7 +77,14 @@ export default function SystemLog() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical connecting line */}
-          <div className="absolute left-[13px] top-4 bottom-4 w-px bg-linear-to-b from-white/14 via-white/6 to-transparent" />
+          <div
+            className="absolute left-[13px] top-4 bottom-4 w-px"
+            style={{
+              background: isDark
+                ? 'linear-gradient(to bottom, rgba(255,255,255,0.14), rgba(255,255,255,0.06), transparent)'
+                : 'linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.05), transparent)',
+            }}
+          />
 
           <div className="space-y-0">
             {logItems.map((item, i) => {
@@ -81,7 +94,10 @@ export default function SystemLog() {
                   {/* Icon with timeline dot */}
                   <div className={`relative shrink-0 w-7 h-7 rounded-xl border flex items-center justify-center ${item.bgCls}`}>
                     {/* Timeline connector dot */}
-                    <div className="absolute -right-[18px] top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-white/14" />
+                    <div
+                      className="absolute -right-[18px] top-1/2 -translate-y-1/2 w-1 h-1 rounded-full"
+                      style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.14)' : 'rgba(0,0,0,0.18)' }}
+                    />
                     <Icon
                       size={13}
                       className={item.iconCls}

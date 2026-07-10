@@ -3,6 +3,7 @@ import {
   BarChart, Bar, XAxis, CartesianGrid, Tooltip,
   ReferenceLine, ResponsiveContainer
 } from 'recharts';
+import { useTheme } from '../../context/ThemeContext';
 
 const chartData = [
   { day: 'Mon', outputs: 18, drafts: 8 },
@@ -45,12 +46,32 @@ const stats = [
 ];
 
 export default function HeroBanner() {
-  return (
-    <div className="card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #0d0d0d 0%, #080808 100%)' }}>
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
-      {/* Ambient atmosphere */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+  const chartTickColor = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.35)';
+  const chartGridStroke = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)';
+  const chartRefLineStroke = isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.15)';
+  const chartRefLabelFill = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.35)';
+  const chartBarOutputsFill = isDark ? 'rgba(255,255,255,0.82)' : 'rgba(0,0,0,0.72)';
+  const chartBarDraftsFill  = isDark ? 'rgba(255,255,255,0.11)' : 'rgba(0,0,0,0.10)';
+  const chartCursorFill     = isDark ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.04)';
+
+  const activeBtnCls = isDark
+    ? 'bg-white text-black'
+    : 'bg-gray-900 text-white';
+  const inactiveBtnCls = isDark
+    ? 'text-white/30 hover:text-white/60'
+    : 'text-black/35 hover:text-black/60';
+
+  return (
+    <div
+      className="dash-card card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
+      style={{ background: isDark ? 'linear-gradient(160deg, #0d0d0d 0%, #080808 100%)' : 'var(--dash-card-bg)' }}
+    >
+
+      {/* Ambient atmosphere — dark mode only */}
+      <div className="dash-ambient absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <div className="absolute top-[-60%] left-[-10%] w-[500px] h-[500px] rounded-full bg-white/[0.025] blur-[140px]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/12 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(255,255,255,0.07),transparent_60%)]" />
@@ -75,7 +96,7 @@ export default function HeroBanner() {
             </p>
           </div>
 
-          {/* Stats row — editorial large numbers */}
+          {/* Stats row */}
           <div>
             <div className="h-px bg-linear-to-r from-transparent via-white/10 to-transparent mb-6" />
             <div className="grid grid-cols-3">
@@ -107,16 +128,18 @@ export default function HeroBanner() {
         {/* ─── RIGHT: Chart ─── */}
         <div className="relative border-l border-white/6 p-6 flex flex-col overflow-hidden">
 
-          {/* Dot grid in chart area */}
-          <div
-            className="absolute inset-0 opacity-[0.07] pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.6) 1px, transparent 1px)',
-              backgroundSize: '18px 18px',
-              maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 75%)',
-              WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 75%)',
-            }}
-          />
+          {/* Dot grid in chart area — dark mode only */}
+          {isDark && (
+            <div
+              className="absolute inset-0 opacity-[0.07] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                backgroundSize: '18px 18px',
+                maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 75%)',
+                WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 75%)',
+              }}
+            />
+          )}
 
           {/* Chart header */}
           <div className="relative flex items-center mb-1">
@@ -126,19 +149,19 @@ export default function HeroBanner() {
               </span>
             </div>
             <div className="ml-auto flex bg-white/[0.04] p-0.5 rounded-lg border border-white/8">
-              <button className="bg-white text-black rounded-md px-2.5 py-1 text-[10px] font-semibold">7D</button>
-              <button className="text-white/30 hover:text-white/60 rounded-md px-2.5 py-1 text-[10px] font-medium transition-colors">30D</button>
-              <button className="text-white/30 hover:text-white/60 rounded-md px-2.5 py-1 text-[10px] font-medium transition-colors">90D</button>
+              <button className={`rounded-md px-2.5 py-1 text-[10px] font-semibold ${activeBtnCls}`}>7D</button>
+              <button className={`rounded-md px-2.5 py-1 text-[10px] font-medium transition-colors ${inactiveBtnCls}`}>30D</button>
+              <button className={`rounded-md px-2.5 py-1 text-[10px] font-medium transition-colors ${inactiveBtnCls}`}>90D</button>
             </div>
           </div>
 
           <div className="flex items-center gap-4 mb-4">
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 rounded-full bg-white/70" />
+              <div className="w-3 h-0.5 rounded-full" style={{ backgroundColor: chartBarOutputsFill }} />
               <span className="text-[10px] text-white/28">Outputs</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 rounded-full bg-white/18" />
+              <div className="w-3 h-0.5 rounded-full" style={{ backgroundColor: chartBarDraftsFill }} />
               <span className="text-[10px] text-white/28">Drafts</span>
             </div>
           </div>
@@ -147,23 +170,23 @@ export default function HeroBanner() {
           <div className="relative flex-1 min-h-[140px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} barGap={2} barCategoryGap="32%">
-                <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                <CartesianGrid strokeDasharray="2 4" stroke={chartGridStroke} vertical={false} />
                 <XAxis
                   dataKey="day"
-                  tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.25)' }}
+                  tick={{ fontSize: 10, fill: chartTickColor }}
                   axisLine={false}
                   tickLine={false}
                   dy={8}
                 />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.025)', radius: 4 }} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: chartCursorFill, radius: 4 }} />
                 <ReferenceLine
                   y={31}
-                  stroke="rgba(255,255,255,0.10)"
+                  stroke={chartRefLineStroke}
                   strokeDasharray="3 5"
-                  label={{ value: 'Avg', position: 'right', fontSize: 9, fill: 'rgba(255,255,255,0.25)', dx: 6 }}
+                  label={{ value: 'Avg', position: 'right', fontSize: 9, fill: chartRefLabelFill, dx: 6 }}
                 />
-                <Bar dataKey="outputs" name="Outputs" fill="rgba(255,255,255,0.82)" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="drafts"  name="Drafts"  fill="rgba(255,255,255,0.11)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="outputs" name="Outputs" fill={chartBarOutputsFill} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="drafts"  name="Drafts"  fill={chartBarDraftsFill}  radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

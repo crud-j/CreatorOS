@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 interface ProjectsHeaderProps {
   totalCount: number;
@@ -7,11 +8,16 @@ interface ProjectsHeaderProps {
 }
 
 export function ProjectsHeader({ totalCount, activeCount, onNewProject }: ProjectsHeaderProps) {
-  return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/8 mb-6"
-      style={{ background: 'linear-gradient(160deg, #0d0d0d 0%, #080808 100%)' }}>
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
-      <div className="absolute inset-0 pointer-events-none">
+  return (
+    <div
+      className="dash-card relative overflow-hidden rounded-3xl border border-white/8 mb-6"
+      style={{ background: isDark ? 'linear-gradient(160deg, #0d0d0d 0%, #080808 100%)' : 'var(--dash-card-bg)' }}
+    >
+
+      <div className="dash-ambient absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,255,255,0.05),transparent_60%)]" />
       </div>

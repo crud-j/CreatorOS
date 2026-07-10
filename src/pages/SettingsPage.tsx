@@ -267,7 +267,7 @@ function Toggle({
       role="switch"
     >
       <span
-        className={`inline-block w-3.5 h-3.5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+        className={`toggle-knob inline-block w-3.5 h-3.5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
           checked ? 'translate-x-5' : 'translate-x-1'
         }`}
       />
@@ -1471,7 +1471,7 @@ export default function SettingsPage() {
   const activeItem = SETTINGS_NAV.find((n) => n.id === activeTab);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#060606]">
+    <div className="dashboard-layout flex h-screen w-screen overflow-hidden bg-[#060606]">
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden min-w-0">
         <TopBar />
@@ -1510,7 +1510,7 @@ export default function SettingsPage() {
                       >
                         {/* Active left bar (non-danger only) */}
                         {isActive && !item.danger && (
-                          <div className="absolute left-0 top-2.5 bottom-2.5 w-0.5 rounded-full bg-white" />
+                          <div className="active-bar absolute left-0 top-2.5 bottom-2.5 w-0.5 rounded-full bg-white" />
                         )}
 
                         <div

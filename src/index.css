@@ -123,153 +123,188 @@ main {
 
 /* ================================================================
    DASHBOARD — LIGHT MODE OVERRIDES
-   Applied via html:not(.dark) so they win over Tailwind utilities
-   without touching any component files. Dark mode uses existing
-   hardcoded Tailwind values unchanged.
+   Scoped to .dashboard-layout so they ONLY affect dashboard pages.
+   Landing / Login / Signup pages are always dark and unaffected.
    ================================================================ */
 
 /* ── Sidebar special ─────────────────────────────────────────── */
-html:not(.dark) .sidebar-bg-img        { opacity: 0; }
-html:not(.dark) .dashboard-sidebar     { background-color: #f5f7fa; border-right: 1px solid rgba(0,0,0,0.07); }
-html:not(.dark) .from-black\/30        { --tw-gradient-from: rgb(245 247 250 / 0.98) var(--tw-gradient-from-position); }
-html:not(.dark) .from-black\/40        { --tw-gradient-from: rgb(245 247 250 / 1) var(--tw-gradient-from-position); }
+html:not(.dark) .dashboard-layout .sidebar-bg-img        { opacity: 0; }
+html:not(.dark) .dashboard-layout .dashboard-sidebar     { background-color: #f5f7fa; border-right: 1px solid rgba(0,0,0,0.07); }
+html:not(.dark) .dashboard-layout .from-black\/30        { --tw-gradient-from: rgb(245 247 250 / 0.98) var(--tw-gradient-from-position); }
+html:not(.dark) .dashboard-layout .from-black\/40        { --tw-gradient-from: rgb(245 247 250 / 1) var(--tw-gradient-from-position); }
 
 /* ── Page backgrounds ────────────────────────────────────────── */
-html:not(.dark) .bg-\[\#060606\]       { background-color: #f0f2f5; }
-html:not(.dark) .bg-black\/95          { background-color: rgba(255,255,255,0.97); }
-html:not(.dark) .bg-\[\#0c0c0c\]      { background-color: #ffffff; }
-html:not(.dark) .bg-\[\#111111\]      { background-color: #ffffff; }
-html:not(.dark) .bg-\[\#111\]         { background-color: #ffffff; }
+html:not(.dark) .dashboard-layout .bg-\[\#060606\]       { background-color: #f0f2f5; }
+html:not(.dark) .dashboard-layout .bg-black\/95          { background-color: rgba(255,255,255,0.97); }
+html:not(.dark) .dashboard-layout .bg-\[\#0c0c0c\]      { background-color: #ffffff; }
+html:not(.dark) .dashboard-layout .bg-\[\#111111\]      { background-color: #ffffff; }
+html:not(.dark) .dashboard-layout .bg-\[\#111\]         { background-color: #ffffff; }
 
 /* ── Glass card surfaces ─────────────────────────────────────── */
-html:not(.dark) .bg-white\/\[0\.025\]  { background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.055); }
-html:not(.dark) .bg-white\/\[0\.01\]   { background-color: rgba(0,0,0,0.01); }
-html:not(.dark) .bg-white\/\[0\.02\]   { background-color: rgba(0,0,0,0.018); }
-html:not(.dark) .bg-white\/\[0\.03\]   { background-color: rgba(0,0,0,0.025); }
-html:not(.dark) .bg-white\/\[0\.035\]  { background-color: rgba(0,0,0,0.03); }
-html:not(.dark) .bg-white\/\[0\.04\]   { background-color: rgba(0,0,0,0.04); }
-html:not(.dark) .bg-white\/\[0\.045\]  { background-color: rgba(0,0,0,0.04); }
-html:not(.dark) .bg-white\/\[0\.06\]   { background-color: rgba(0,0,0,0.05); }
-html:not(.dark) .bg-white\/\[0\.08\]   { background-color: rgba(0,0,0,0.06); }
-html:not(.dark) .bg-white\/2\.5        { background-color: rgba(0,0,0,0.025); }
-html:not(.dark) .bg-white\/3           { background-color: rgba(0,0,0,0.028); }
-html:not(.dark) .bg-white\/4           { background-color: rgba(0,0,0,0.038); }
-html:not(.dark) .bg-white\/5           { background-color: rgba(0,0,0,0.046); }
-html:not(.dark) .bg-white\/6           { background-color: rgba(0,0,0,0.054); }
-html:not(.dark) .bg-white\/8           { background-color: rgba(0,0,0,0.065); }
-html:not(.dark) .bg-white\/10          { background-color: rgba(0,0,0,0.08); }
-html:not(.dark) .bg-white\/12          { background-color: rgba(0,0,0,0.09); }
-html:not(.dark) .bg-white\/15          { background-color: rgba(0,0,0,0.10); }
-html:not(.dark) .bg-white\/20          { background-color: rgba(0,0,0,0.12); }
-html:not(.dark) .bg-white\/25          { background-color: rgba(0,0,0,0.15); }
-html:not(.dark) .bg-white\/30          { background-color: rgba(0,0,0,0.18); }
-html:not(.dark) .bg-white\/40          { background-color: rgba(0,0,0,0.22); }
-html:not(.dark) .bg-white\/50          { background-color: rgba(0,0,0,0.28); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.025\]  { background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.055); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.01\]   { background-color: rgba(0,0,0,0.01); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.02\]   { background-color: rgba(0,0,0,0.018); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.03\]   { background-color: rgba(0,0,0,0.025); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.035\]  { background-color: rgba(0,0,0,0.03); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.04\]   { background-color: rgba(0,0,0,0.04); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.045\]  { background-color: rgba(0,0,0,0.04); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.06\]   { background-color: rgba(0,0,0,0.05); }
+html:not(.dark) .dashboard-layout .bg-white\/\[0\.08\]   { background-color: rgba(0,0,0,0.06); }
+html:not(.dark) .dashboard-layout .bg-white\/2\.5        { background-color: rgba(0,0,0,0.025); }
+html:not(.dark) .dashboard-layout .bg-white\/3           { background-color: rgba(0,0,0,0.028); }
+html:not(.dark) .dashboard-layout .bg-white\/4           { background-color: rgba(0,0,0,0.038); }
+html:not(.dark) .dashboard-layout .bg-white\/5           { background-color: rgba(0,0,0,0.046); }
+html:not(.dark) .dashboard-layout .bg-white\/6           { background-color: rgba(0,0,0,0.054); }
+html:not(.dark) .dashboard-layout .bg-white\/8           { background-color: rgba(0,0,0,0.065); }
+html:not(.dark) .dashboard-layout .bg-white\/10          { background-color: rgba(0,0,0,0.08); }
+html:not(.dark) .dashboard-layout .bg-white\/12          { background-color: rgba(0,0,0,0.09); }
+html:not(.dark) .dashboard-layout .bg-white\/15          { background-color: rgba(0,0,0,0.10); }
+html:not(.dark) .dashboard-layout .bg-white\/20          { background-color: rgba(0,0,0,0.12); }
+html:not(.dark) .dashboard-layout .bg-white\/25          { background-color: rgba(0,0,0,0.15); }
+html:not(.dark) .dashboard-layout .bg-white\/30          { background-color: rgba(0,0,0,0.18); }
+html:not(.dark) .dashboard-layout .bg-white\/40          { background-color: rgba(0,0,0,0.22); }
+html:not(.dark) .dashboard-layout .bg-white\/50          { background-color: rgba(0,0,0,0.28); }
 
 /* ── Text ────────────────────────────────────────────────────── */
-html:not(.dark) .text-white            { color: #0a0a0a; }
-html:not(.dark) .text-white\/90,
-html:not(.dark) .text-white\/88        { color: rgba(10,10,10,0.90); }
-html:not(.dark) .text-white\/85,
-html:not(.dark) .text-white\/80        { color: rgba(10,10,10,0.80); }
-html:not(.dark) .text-white\/75,
-html:not(.dark) .text-white\/70        { color: rgba(10,10,10,0.70); }
-html:not(.dark) .text-white\/65,
-html:not(.dark) .text-white\/60        { color: rgba(10,10,10,0.60); }
-html:not(.dark) .text-white\/55,
-html:not(.dark) .text-white\/50        { color: rgba(10,10,10,0.52); }
-html:not(.dark) .text-white\/45,
-html:not(.dark) .text-white\/40        { color: rgba(10,10,10,0.42); }
-html:not(.dark) .text-white\/38,
-html:not(.dark) .text-white\/35        { color: rgba(10,10,10,0.36); }
-html:not(.dark) .text-white\/30        { color: rgba(10,10,10,0.30); }
-html:not(.dark) .text-white\/28,
-html:not(.dark) .text-white\/25        { color: rgba(10,10,10,0.26); }
-html:not(.dark) .text-white\/22,
-html:not(.dark) .text-white\/20        { color: rgba(10,10,10,0.22); }
-html:not(.dark) .text-white\/18,
-html:not(.dark) .text-white\/15        { color: rgba(10,10,10,0.18); }
-html:not(.dark) .text-white\/10        { color: rgba(10,10,10,0.12); }
+html:not(.dark) .dashboard-layout .text-white            { color: #0a0a0a; }
+html:not(.dark) .dashboard-layout .text-white\/90,
+html:not(.dark) .dashboard-layout .text-white\/88        { color: rgba(10,10,10,0.90); }
+html:not(.dark) .dashboard-layout .text-white\/85,
+html:not(.dark) .dashboard-layout .text-white\/80        { color: rgba(10,10,10,0.80); }
+html:not(.dark) .dashboard-layout .text-white\/75,
+html:not(.dark) .dashboard-layout .text-white\/70        { color: rgba(10,10,10,0.70); }
+html:not(.dark) .dashboard-layout .text-white\/65,
+html:not(.dark) .dashboard-layout .text-white\/60        { color: rgba(10,10,10,0.60); }
+html:not(.dark) .dashboard-layout .text-white\/55,
+html:not(.dark) .dashboard-layout .text-white\/50        { color: rgba(10,10,10,0.52); }
+html:not(.dark) .dashboard-layout .text-white\/45,
+html:not(.dark) .dashboard-layout .text-white\/40        { color: rgba(10,10,10,0.42); }
+html:not(.dark) .dashboard-layout .text-white\/38,
+html:not(.dark) .dashboard-layout .text-white\/35        { color: rgba(10,10,10,0.36); }
+html:not(.dark) .dashboard-layout .text-white\/30        { color: rgba(10,10,10,0.30); }
+html:not(.dark) .dashboard-layout .text-white\/28,
+html:not(.dark) .dashboard-layout .text-white\/25        { color: rgba(10,10,10,0.26); }
+html:not(.dark) .dashboard-layout .text-white\/22,
+html:not(.dark) .dashboard-layout .text-white\/20        { color: rgba(10,10,10,0.22); }
+html:not(.dark) .dashboard-layout .text-white\/18,
+html:not(.dark) .dashboard-layout .text-white\/15        { color: rgba(10,10,10,0.18); }
+html:not(.dark) .dashboard-layout .text-white\/10        { color: rgba(10,10,10,0.12); }
 
 /* ── Borders ─────────────────────────────────────────────────── */
-html:not(.dark) .border-white          { border-color: rgba(0,0,0,0.90); }
-html:not(.dark) .border-white\/5       { border-color: rgba(0,0,0,0.05); }
-html:not(.dark) .border-white\/6       { border-color: rgba(0,0,0,0.06); }
-html:not(.dark) .border-white\/8       { border-color: rgba(0,0,0,0.08); }
-html:not(.dark) .border-white\/10      { border-color: rgba(0,0,0,0.10); }
-html:not(.dark) .border-white\/12      { border-color: rgba(0,0,0,0.12); }
-html:not(.dark) .border-white\/15      { border-color: rgba(0,0,0,0.15); }
-html:not(.dark) .border-white\/18      { border-color: rgba(0,0,0,0.18); }
-html:not(.dark) .border-white\/20      { border-color: rgba(0,0,0,0.20); }
-html:not(.dark) .border-white\/25      { border-color: rgba(0,0,0,0.25); }
+html:not(.dark) .dashboard-layout .border-white          { border-color: rgba(0,0,0,0.90); }
+html:not(.dark) .dashboard-layout .border-white\/5       { border-color: rgba(0,0,0,0.05); }
+html:not(.dark) .dashboard-layout .border-white\/6       { border-color: rgba(0,0,0,0.06); }
+html:not(.dark) .dashboard-layout .border-white\/8       { border-color: rgba(0,0,0,0.08); }
+html:not(.dark) .dashboard-layout .border-white\/10      { border-color: rgba(0,0,0,0.10); }
+html:not(.dark) .dashboard-layout .border-white\/12      { border-color: rgba(0,0,0,0.12); }
+html:not(.dark) .dashboard-layout .border-white\/15      { border-color: rgba(0,0,0,0.15); }
+html:not(.dark) .dashboard-layout .border-white\/18      { border-color: rgba(0,0,0,0.18); }
+html:not(.dark) .dashboard-layout .border-white\/20      { border-color: rgba(0,0,0,0.20); }
+html:not(.dark) .dashboard-layout .border-white\/25      { border-color: rgba(0,0,0,0.25); }
 
 /* ── Hover backgrounds ───────────────────────────────────────── */
-html:not(.dark) .hover\:bg-white\/\[0\.025\]:hover  { background-color: rgba(0,0,0,0.025); box-shadow: none; }
-html:not(.dark) .hover\:bg-white\/\[0\.03\]:hover   { background-color: rgba(0,0,0,0.028); }
-html:not(.dark) .hover\:bg-white\/\[0\.035\]:hover  { background-color: rgba(0,0,0,0.032); }
-html:not(.dark) .hover\:bg-white\/\[0\.045\]:hover  { background-color: rgba(0,0,0,0.038); }
-html:not(.dark) .hover\:bg-white\/\[0\.06\]:hover   { background-color: rgba(0,0,0,0.05); }
-html:not(.dark) .hover\:bg-white\/\[0\.08\]:hover   { background-color: rgba(0,0,0,0.06); }
-html:not(.dark) .hover\:bg-white\/4:hover           { background-color: rgba(0,0,0,0.038); }
-html:not(.dark) .hover\:bg-white\/5:hover           { background-color: rgba(0,0,0,0.046); }
-html:not(.dark) .hover\:bg-white\/6:hover           { background-color: rgba(0,0,0,0.054); }
-html:not(.dark) .hover\:bg-white\/8:hover           { background-color: rgba(0,0,0,0.065); }
-html:not(.dark) .hover\:bg-white\/10:hover          { background-color: rgba(0,0,0,0.08); }
-html:not(.dark) .hover\:bg-white\/12:hover          { background-color: rgba(0,0,0,0.09); }
-html:not(.dark) .hover\:bg-white\/15:hover          { background-color: rgba(0,0,0,0.10); }
-html:not(.dark) .hover\:bg-white\/18:hover          { background-color: rgba(0,0,0,0.11); }
-html:not(.dark) .hover\:bg-white\/20:hover          { background-color: rgba(0,0,0,0.12); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.025\]:hover  { background-color: rgba(0,0,0,0.025); box-shadow: none; }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.03\]:hover   { background-color: rgba(0,0,0,0.028); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.035\]:hover  { background-color: rgba(0,0,0,0.032); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.045\]:hover  { background-color: rgba(0,0,0,0.038); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.06\]:hover   { background-color: rgba(0,0,0,0.05); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/\[0\.08\]:hover   { background-color: rgba(0,0,0,0.06); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/4:hover           { background-color: rgba(0,0,0,0.038); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/5:hover           { background-color: rgba(0,0,0,0.046); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/6:hover           { background-color: rgba(0,0,0,0.054); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/8:hover           { background-color: rgba(0,0,0,0.065); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/10:hover          { background-color: rgba(0,0,0,0.08); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/12:hover          { background-color: rgba(0,0,0,0.09); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/15:hover          { background-color: rgba(0,0,0,0.10); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/18:hover          { background-color: rgba(0,0,0,0.11); }
+html:not(.dark) .dashboard-layout .hover\:bg-white\/20:hover          { background-color: rgba(0,0,0,0.12); }
 
 /* ── Hover borders ───────────────────────────────────────────── */
-html:not(.dark) .hover\:border-white\/6:hover       { border-color: rgba(0,0,0,0.06); }
-html:not(.dark) .hover\:border-white\/8:hover       { border-color: rgba(0,0,0,0.08); }
-html:not(.dark) .hover\:border-white\/10:hover      { border-color: rgba(0,0,0,0.10); }
-html:not(.dark) .hover\:border-white\/12:hover      { border-color: rgba(0,0,0,0.12); }
-html:not(.dark) .hover\:border-white\/15:hover      { border-color: rgba(0,0,0,0.15); }
-html:not(.dark) .hover\:border-white\/18:hover      { border-color: rgba(0,0,0,0.18); }
-html:not(.dark) .hover\:border-white\/20:hover      { border-color: rgba(0,0,0,0.20); }
-html:not(.dark) .hover\:border-white\/25:hover      { border-color: rgba(0,0,0,0.25); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/6:hover       { border-color: rgba(0,0,0,0.06); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/8:hover       { border-color: rgba(0,0,0,0.08); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/10:hover      { border-color: rgba(0,0,0,0.10); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/12:hover      { border-color: rgba(0,0,0,0.12); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/15:hover      { border-color: rgba(0,0,0,0.15); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/18:hover      { border-color: rgba(0,0,0,0.18); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/20:hover      { border-color: rgba(0,0,0,0.20); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/25:hover      { border-color: rgba(0,0,0,0.25); }
 
 /* ── Hover text ──────────────────────────────────────────────── */
-html:not(.dark) .hover\:text-white:hover           { color: rgba(10,10,10,0.92); }
-html:not(.dark) .hover\:text-white\/70:hover       { color: rgba(10,10,10,0.70); }
-html:not(.dark) .hover\:text-white\/90:hover       { color: rgba(10,10,10,0.90); }
+html:not(.dark) .dashboard-layout .hover\:text-white:hover           { color: rgba(10,10,10,0.92); }
+html:not(.dark) .dashboard-layout .hover\:text-white\/70:hover       { color: rgba(10,10,10,0.70); }
+html:not(.dark) .dashboard-layout .hover\:text-white\/90:hover       { color: rgba(10,10,10,0.90); }
 
 /* ── Group-hover ─────────────────────────────────────────────── */
-html:not(.dark) .group:hover .group-hover\:text-white      { color: rgba(10,10,10,0.90); }
-html:not(.dark) .group:hover .group-hover\:text-white\/55  { color: rgba(10,10,10,0.55); }
-html:not(.dark) .group:hover .group-hover\:border-white\/15 { border-color: rgba(0,0,0,0.15); }
-html:not(.dark) .group:hover .group-hover\:border-white\/18 { border-color: rgba(0,0,0,0.18); }
+html:not(.dark) .dashboard-layout .group:hover .group-hover\:text-white      { color: rgba(10,10,10,0.90); }
+html:not(.dark) .dashboard-layout .group:hover .group-hover\:text-white\/55  { color: rgba(10,10,10,0.55); }
+html:not(.dark) .dashboard-layout .group:hover .group-hover\:border-white\/15 { border-color: rgba(0,0,0,0.15); }
+html:not(.dark) .dashboard-layout .group:hover .group-hover\:border-white\/18 { border-color: rgba(0,0,0,0.18); }
 
 /* ── Focus / focus-within ────────────────────────────────────── */
-html:not(.dark) .focus\:border-white\/18:focus              { border-color: rgba(0,0,0,0.22); }
-html:not(.dark) .focus\:border-white\/20:focus              { border-color: rgba(0,0,0,0.25); }
-html:not(.dark) .focus\:bg-white\/\[0\.06\]:focus           { background-color: rgba(0,0,0,0.04); }
-html:not(.dark) .focus-within\:border-white\/18:focus-within { border-color: rgba(0,0,0,0.22); }
-html:not(.dark) .focus-within\:border-white\/20:focus-within { border-color: rgba(0,0,0,0.25); }
-html:not(.dark) .focus-within\:ring-white\/20:focus-within  { --tw-ring-color: rgba(0,0,0,0.12); }
-html:not(.dark) .focus-within\:bg-white\/\[0\.06\]:focus-within { background-color: rgba(0,0,0,0.04); }
+html:not(.dark) .dashboard-layout .focus\:border-white\/18:focus              { border-color: rgba(0,0,0,0.22); }
+html:not(.dark) .dashboard-layout .focus\:border-white\/20:focus              { border-color: rgba(0,0,0,0.25); }
+html:not(.dark) .dashboard-layout .focus\:bg-white\/\[0\.06\]:focus           { background-color: rgba(0,0,0,0.04); }
+html:not(.dark) .dashboard-layout .focus-within\:border-white\/18:focus-within { border-color: rgba(0,0,0,0.22); }
+html:not(.dark) .dashboard-layout .focus-within\:border-white\/20:focus-within { border-color: rgba(0,0,0,0.25); }
+html:not(.dark) .dashboard-layout .focus-within\:ring-white\/20:focus-within  { --tw-ring-color: rgba(0,0,0,0.12); }
+html:not(.dark) .dashboard-layout .focus-within\:bg-white\/\[0\.06\]:focus-within { background-color: rgba(0,0,0,0.04); }
 
 /* ── Placeholders ────────────────────────────────────────────── */
-html:not(.dark) .placeholder\:text-white\/20::placeholder { color: rgba(10,10,10,0.32); }
-html:not(.dark) .placeholder\:text-white\/25::placeholder { color: rgba(10,10,10,0.34); }
-html:not(.dark) .placeholder\:text-white\/35::placeholder { color: rgba(10,10,10,0.40); }
+html:not(.dark) .dashboard-layout .placeholder\:text-white\/20::placeholder { color: rgba(10,10,10,0.32); }
+html:not(.dark) .dashboard-layout .placeholder\:text-white\/25::placeholder { color: rgba(10,10,10,0.34); }
+html:not(.dark) .dashboard-layout .placeholder\:text-white\/35::placeholder { color: rgba(10,10,10,0.40); }
 
 /* ── Divider gradients ───────────────────────────────────────── */
-html:not(.dark) .via-white\/10  { --tw-gradient-via: rgba(0,0,0,0.07) var(--tw-gradient-via-position); }
+html:not(.dark) .dashboard-layout .via-white\/10  { --tw-gradient-via: rgba(0,0,0,0.07) var(--tw-gradient-via-position); }
 
 /* ── Card shadows in light mode ──────────────────────────────── */
-html:not(.dark) .hover\:shadow-\[0_0_60px_rgba\(255\,255\,255\,0\.06\)\]:hover {
+html:not(.dark) .dashboard-layout .hover\:shadow-\[0_0_60px_rgba\(255\,255\,255\,0\.06\)\]:hover {
   box-shadow: 0 4px 24px rgba(0,0,0,0.09);
 }
 
 /* ── Scrollbars ──────────────────────────────────────────────── */
-html:not(.dark) main::-webkit-scrollbar-thumb        { background: rgba(0,0,0,0.10); }
-html:not(.dark) main::-webkit-scrollbar-thumb:hover  { background: rgba(0,0,0,0.18); }
-html:not(.dark) .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); }
+html:not(.dark) .dashboard-layout main::-webkit-scrollbar-thumb        { background: rgba(0,0,0,0.10); }
+html:not(.dark) .dashboard-layout main::-webkit-scrollbar-thumb:hover  { background: rgba(0,0,0,0.18); }
+html:not(.dark) .dashboard-layout .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); }
 
 /* ── TopBar border in light mode ─────────────────────────────── */
-html:not(.dark) .border-b.border-white\/10 { border-bottom-color: rgba(0,0,0,0.09); }
+html:not(.dark) .dashboard-layout .border-b.border-white\/10 { border-bottom-color: rgba(0,0,0,0.09); }
 
 /* ── Notification dot ring ───────────────────────────────────── */
-html:not(.dark) .ring-black { --tw-ring-color: #f0f2f5; }
+html:not(.dark) .dashboard-layout .ring-black { --tw-ring-color: #f0f2f5; }
+
+/* ================================================================
+   DASHBOARD CARD BACKGROUND TOKENS
+   Cards use inline style fallback: var(--dash-card-bg, dark-gradient)
+   In light mode the variable is set to white, overriding the fallback.
+   ================================================================ */
+html:not(.dark) .dashboard-layout {
+  --dash-card-bg: #ffffff;
+}
+
+/* Elevate cards with a subtle shadow in light mode */
+html:not(.dark) .dashboard-layout .dash-card {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Hide dark-mode-only ambient glow decorations (white blobs on white bg look wrong) */
+html:not(.dark) .dashboard-layout .dash-ambient {
+  display: none;
+}
+
+/* ── Additional border/bg helpers not yet covered ──────────────── */
+html:not(.dark) .dashboard-layout .border-white\/14      { border-color: rgba(0,0,0,0.11); }
+html:not(.dark) .dashboard-layout .hover\:border-white\/14:hover { border-color: rgba(0,0,0,0.11); }
+html:not(.dark) .dashboard-layout .via-white\/12  { --tw-gradient-via: rgba(0,0,0,0.08) var(--tw-gradient-via-position); }
+html:not(.dark) .dashboard-layout .via-white\/8   { --tw-gradient-via: rgba(0,0,0,0.05) var(--tw-gradient-via-position); }
+html:not(.dark) .dashboard-layout .via-white\/6   { --tw-gradient-via: rgba(0,0,0,0.04) var(--tw-gradient-via-position); }
+html:not(.dark) .dashboard-layout .via-white\/14  { --tw-gradient-via: rgba(0,0,0,0.08) var(--tw-gradient-via-position); }
+
+/* Grain noise overlay — tone down in light mode */
+html:not(.dark) .dashboard-layout .card-noise::before { opacity: 0.02; }
+
+/* Active sidebar/nav indicator bar — white in dark, dark in light */
+html:not(.dark) .dashboard-layout .active-bar { background-color: rgba(0,0,0,0.65); }
+
+/* Settings toggle knob — white in dark mode (on any track), dark in light mode */
+html:not(.dark) .dashboard-layout .toggle-knob { background-color: rgba(0,0,0,0.55); }

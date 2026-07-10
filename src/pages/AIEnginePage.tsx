@@ -803,7 +803,7 @@ export default function AIEnginePage() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#060606]">
+    <div className="dashboard-layout flex h-screen w-screen overflow-hidden bg-[#060606]">
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden min-w-0">
         <TopBar />

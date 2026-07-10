@@ -1,4 +1,5 @@
 import { SlidersHorizontal, Calendar, ArrowUpRight } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 const rows = [
   {
@@ -67,12 +68,21 @@ const rows = [
 ];
 
 export default function PipelineTable() {
-  return (
-    <div className="card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #0c0c0c 0%, #080808 100%)' }}>
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
-      {/* Ambient */}
-      <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden">
+  const neutralBadgeStyle = isDark
+    ? { backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.38)', border: '1px solid rgba(255,255,255,0.08)' }
+    : { backgroundColor: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', border: '1px solid rgba(0,0,0,0.10)' };
+
+  return (
+    <div
+      className="dash-card card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
+      style={{ background: isDark ? 'linear-gradient(180deg, #0c0c0c 0%, #080808 100%)' : 'var(--dash-card-bg)' }}
+    >
+
+      {/* Ambient — dark mode only */}
+      <div className="dash-ambient absolute inset-0 pointer-events-none rounded-3xl overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.05),transparent_55%)]" />
       </div>
@@ -131,7 +141,7 @@ export default function PipelineTable() {
                   className="px-1.5 py-0.5 rounded text-[9px] font-semibold"
                   style={p.color
                     ? { backgroundColor: `${p.color}1A`, color: p.color, border: `1px solid ${p.color}30` }
-                    : { backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.38)', border: '1px solid rgba(255,255,255,0.08)' }
+                    : neutralBadgeStyle
                   }
                 >
                   {p.label}

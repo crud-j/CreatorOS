@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import { Mic, Calendar, Sparkles, Link2 } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 export default function QuickSpin() {
   const [brandVoice, setBrandVoice] = useState(true);
   const [autoSchedule, setAutoSchedule] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <div className="card-noise relative rounded-3xl border border-white/8 overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #0d0d0d 0%, #090909 100%)' }}>
+    <div
+      className="dash-card card-noise relative rounded-3xl border border-white/8 overflow-hidden"
+      style={{ background: isDark ? 'linear-gradient(160deg, #0d0d0d 0%, #090909 100%)' : 'var(--dash-card-bg)' }}
+    >
 
-      {/* Ambient atmosphere */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+      {/* Ambient atmosphere — dark mode only */}
+      <div className="dash-ambient absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <div className="absolute top-[-40%] right-[-20%] w-[280px] h-[280px] rounded-full bg-white/[0.03] blur-[100px]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(255,255,255,0.06),transparent_60%)]" />
@@ -78,14 +83,28 @@ export default function QuickSpin() {
                   <div className="text-[10px] text-white/28 mt-0.5">{sub}</div>
                 </div>
               </div>
+
+              {/* Toggle switch — adapts to light/dark */}
               <button
                 onClick={() => set(!val)}
                 className={`relative w-9 h-5 rounded-full transition-all duration-250 border shrink-0 ${
-                  val ? 'bg-white border-white/50 shadow-[0_0_12px_rgba(255,255,255,0.15)]' : 'bg-white/6 border-white/10'
+                  val
+                    ? isDark
+                      ? 'bg-white border-white/50 shadow-[0_0_12px_rgba(255,255,255,0.15)]'
+                      : 'bg-gray-800 border-gray-700'
+                    : isDark
+                      ? 'bg-white/6 border-white/10'
+                      : 'bg-black/10 border-black/12'
                 }`}
               >
                 <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full transition-all duration-250 shadow-sm ${
-                  val ? 'translate-x-4 bg-black' : 'bg-white/50'
+                  val
+                    ? isDark
+                      ? 'translate-x-4 bg-black'
+                      : 'translate-x-4 bg-white'
+                    : isDark
+                      ? 'bg-white/50'
+                      : 'bg-black/30'
                 }`} />
               </button>
             </div>
@@ -93,12 +112,16 @@ export default function QuickSpin() {
         </div>
 
         {/* Generate Button */}
-        <button className="relative w-full h-12 rounded-2xl bg-white hover:bg-white/92 active:scale-[0.99] flex items-center justify-center gap-2.5 transition-all duration-200 shadow-[0_0_50px_rgba(255,255,255,0.12)] group overflow-hidden">
-          {/* Inner shimmer */}
-          <div className="absolute inset-0 bg-linear-to-b from-white to-white/90 opacity-100" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.6),transparent_70%)] opacity-60" />
-          <Sparkles size={14} className="relative z-10 text-black/70" />
-          <span className="relative z-10 text-black font-semibold text-[13.5px] tracking-[-0.01em]">
+        <button
+          className={`relative w-full h-12 rounded-2xl active:scale-[0.99] flex items-center justify-center gap-2.5 transition-all duration-200 group overflow-hidden ${
+            isDark
+              ? 'bg-white hover:bg-white/92 shadow-[0_0_50px_rgba(255,255,255,0.12)]'
+              : 'bg-gray-900 hover:bg-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.15)]'
+          }`}
+        >
+          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-white to-white/90' : 'bg-linear-to-b from-gray-800 to-gray-900'} opacity-100`} />
+          <Sparkles size={14} className={`relative z-10 ${isDark ? 'text-black/70' : 'text-white/70'}`} />
+          <span className={`relative z-10 font-semibold text-[13.5px] tracking-[-0.01em] ${isDark ? 'text-black' : 'text-white'}`}>
             Generate 30 Outputs
           </span>
         </button>

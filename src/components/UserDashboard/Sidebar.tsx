@@ -138,7 +138,7 @@ export default function Sidebar() {
                       {active && (
                         <>
                           <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_left,rgba(255,255,255,0.12),transparent_70%)]" />
-                          <div className="absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-white" />
+                          <div className="active-bar absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-white" />
                         </>
                       )}
 
@@ -191,7 +191,7 @@ export default function Sidebar() {
                       {active && (
                         <>
                           <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_left,rgba(255,255,255,0.12),transparent_70%)]" />
-                          <div className="absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-white" />
+                          <div className="active-bar absolute left-0 top-3 bottom-3 w-0.5 rounded-full bg-white" />
                         </>
                       )}
 

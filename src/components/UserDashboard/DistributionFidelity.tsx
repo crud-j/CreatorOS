@@ -1,3 +1,5 @@
+import { useTheme } from '../../context/ThemeContext';
+
 const platforms = [
   { name: 'YouTube',    badge: 'YT', color: '#FF4444', pct: 89, posts: 134, rank: 1 },
   { name: 'Instagram',  badge: 'IG', color: '#E1306C', pct: 78, posts: 124, rank: 2 },
@@ -8,14 +10,25 @@ const platforms = [
 ];
 
 export default function DistributionFidelity() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const topPct = Math.max(...platforms.map(p => p.pct));
 
-  return (
-    <div className="card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #0b0b0b 0%, #080808 100%)' }}>
+  const activeBtnCls = isDark
+    ? 'bg-white text-black'
+    : 'bg-gray-900 text-white';
+  const inactiveBtnCls = isDark
+    ? 'text-white/30 hover:text-white/60'
+    : 'text-black/35 hover:text-black/60';
 
-      {/* Ambient atmosphere */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+  return (
+    <div
+      className="dash-card card-noise w-full rounded-3xl border border-white/8 overflow-hidden"
+      style={{ background: isDark ? 'linear-gradient(160deg, #0b0b0b 0%, #080808 100%)' : 'var(--dash-card-bg)' }}
+    >
+
+      {/* Ambient atmosphere — dark mode only */}
+      <div className="dash-ambient absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <div className="absolute top-[-40%] right-[-5%] w-[320px] h-[320px] rounded-full bg-white/[0.025] blur-[120px]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_0%,rgba(255,255,255,0.05),transparent_55%)]" />
@@ -31,9 +44,9 @@ export default function DistributionFidelity() {
             <p className="text-[11px] text-white/28 mt-1">Platform reach vs. content volume</p>
           </div>
           <div className="flex bg-white/[0.04] p-0.5 rounded-xl border border-white/8">
-            <button className="bg-white text-black rounded-lg px-3 py-1.5 text-[10px] font-semibold">7D</button>
-            <button className="text-white/30 hover:text-white/60 rounded-lg px-3 py-1.5 text-[10px] font-medium transition-colors">30D</button>
-            <button className="text-white/30 hover:text-white/60 rounded-lg px-3 py-1.5 text-[10px] font-medium transition-colors">90D</button>
+            <button className={`rounded-lg px-3 py-1.5 text-[10px] font-semibold ${activeBtnCls}`}>7D</button>
+            <button className={`rounded-lg px-3 py-1.5 text-[10px] font-medium transition-colors ${inactiveBtnCls}`}>30D</button>
+            <button className={`rounded-lg px-3 py-1.5 text-[10px] font-medium transition-colors ${inactiveBtnCls}`}>90D</button>
           </div>
         </div>
 
