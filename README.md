@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# CreatorOS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Turn one video into a month of content.
 
-Currently, two official plugins are available:
+CreatorOS is an AI-powered content operating system for creators. It repurposes long-form video into platform-ready posts in your voice, then schedules and publishes across channels using automation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- **Frontend** — React 19, TypeScript, Vite, Tailwind CSS v4
+- **Animation** — Framer Motion, GSAP, Three.js / React Three Fiber, Spline
+- **Backend** — Express (Node.js), Stripe webhooks
+- **Database / Auth** — Supabase
+- **Payments** — Stripe
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Pages
 
-## Expanding the ESLint configuration
+| Route | Description |
+|---|---|
+| `/` | Landing page with hero, features, pricing, FAQ |
+| `/about` | About us |
+| `/login` | User login |
+| `/signup` | User signup |
+| `/dashboard` | Creator dashboard |
+| `/projects` | Projects manager |
+| `/analytics` | Content analytics |
+| `/automation` | UiPath automation pipeline |
+| `/ai-engine` | AI content engine |
+| `/settings` | Account settings |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js 18+
+- A Supabase project
+- A Stripe account
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Install
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file in the root:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
+
+### Run (frontend only)
+
+```bash
+npm run dev
+```
+
+### Run (full stack with backend + Stripe listener)
+
+```bash
+npm run dev:full
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+## Scripts
+
+| Script | Description |
+|---|---|
+| `dev` | Start Vite dev server |
+| `build` | Type-check and build for production |
+| `preview` | Preview production build |
+| `backend` | Run Express backend |
+| `backend:dev` | Run backend with hot reload |
+| `stripe:listen` | Forward Stripe webhooks locally |
+| `dev:full` | Run frontend, backend, and Stripe listener concurrently |
+
+## License
+
+© 2026 CreatorOS Inc. All rights reserved.
